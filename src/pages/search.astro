@@ -1,0 +1,351 @@
+---
+// Search results page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+
+// Get search query from URL parameters
+const url = new URL(Astro.request.url);
+const searchQuery = url.searchParams.get('q') || '';
+
+// Sample search results - in a real app, this would come from a search engine/database
+const searchResults = searchQuery ? [
+  {
+    type: 'switch',
+    title: 'Cherry MX Blue Review: The Clicky Typing Icon',
+    slug: 'cherry-mx-blue',
+    excerpt: 'The definitive clicky switch that started it all. Beloved by typists for its audible and tactile feedback...',
+    category: 'switches',
+    date: '2025-08-07',
+    rating: 8.5,
+    image: '/images/cherry-mx-blue-card.jpg'
+  },
+  {
+    type: 'switch', 
+    title: 'Gateron Oil Kings: The Deep Thock Experience',
+    slug: 'gateron-oil-kings',
+    excerpt: 'Deep-sounding linear switch with a premium feel. Great for thock lovers seeking that satisfying bottom-out sound...',
+    category: 'switches',
+    date: '2025-08-06',
+    rating: 9.2,
+    image: '/images/gateron-oil-kings-card.jpg'
+  },
+  {
+    type: 'tutorial',
+    title: 'Tofu65 Gasket Upgrade: Transformation Guide', 
+    slug: 'tofu65-gasket-upgrade',
+    excerpt: 'How to transform your Tofu65 into a gasket-mount wonder. Complete step-by-step guide with tips and tricks...',
+    category: 'tutorials',
+    date: '2025-08-02',
+    rating: 8.9,
+    image: '/images/tofu65-upgrade-card.jpg'
+  }
+].filter(result => 
+  result.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  result.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  result.category.toLowerCase().includes(searchQuery.toLowerCase())
+) : [];
+
+const breadcrumbs = [
+  { name: 'Search', href: '/search' },
+  { name: `"${searchQuery}"`, current: true }
+];
+---
+
+<BaseLayout 
+  title={searchQuery ? `Search results for "${searchQuery}" - Thockverse` : 'Search - Thockverse'}
+  description={searchQuery ? `Search results for "${searchQuery}" on Thockverse` : 'Search mechanical keyboard switches, reviews, and guides'}
+>
+  {searchQuery && <Breadcrumbs paths={breadcrumbs} />}
+  
+  <div class="space-y-8">
+    <!-- Search Header -->
+    <div class="space-y-6">
+      <div class="text-center space-y-4">
+        <h1 class="text-3xl lg:text-4xl font-bold text-gradient">
+          {searchQuery ? 'Search Results' : 'Search Thockverse'}
+        </h1>
+        {searchQuery ? (
+          <p class="text-xl text-muted-foreground">
+            Results for <span class="text-primary-400 font-semibold">"{searchQuery}"</span>
+          </p>
+        ) : (
+          <p class="text-xl text-muted-foreground">
+            Find switches, reviews, guides, and more
+          </p>
+        )}
+      </div>
+
+      <!-- Search Form -->
+      <div class="max-w-2xl mx-auto">
+        <form action="/search" method="get" class="relative">
+          <input 
+            type="search" 
+            name="q"
+            value={searchQuery}
+            placeholder="Search switches, reviews, guides..."
+            class="w-full px-6 py-4 pl-14 pr-6 text-lg rounded-xl bg-input border border-border text-foreground placeholder-muted-foreground focus-space"
+            autocomplete="off"
+          />
+          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+            <svg class="h-6 w-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <button 
+            type="submit"
+            class="absolute inset-y-0 right-0 px-6 bg-primary-500 hover:bg-primary-400 text-white rounded-r-xl transition-colors duration-200"
+          >
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+
+    {searchQuery && (
+      <div class="space-y-6">
+        <!-- Results Summary -->
+        <div class="flex items-center justify-between glass-dark rounded-lg p-4">
+          <div class="flex items-center space-x-3">
+            <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+            <span class="text-muted-foreground">
+              Found <span class="font-semibold text-primary-400">{searchResults.length}</span> result{searchResults.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+          
+          {searchResults.length > 0 && (
+            <div class="text-sm text-muted-foreground">
+              Showing all results
+            </div>
+          )}
+        </div>
+
+        {searchResults.length > 0 ? (
+          <!-- Search Results -->
+          <div class="space-y-6">
+            {searchResults.map((result, index) => (
+              <article key={result.slug} class={`glass-dark rounded-xl p-6 hover:scale-[1.01] transition-all duration-300 group float-animation`} style={`animation-delay: ${index * 0.1}s`}>
+                <div class="flex flex-col lg:flex-row gap-6">
+                  <!-- Result Image -->
+                  <div class="lg:w-48 flex-shrink-0">
+                    <div class="aspect-video bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-lg overflow-hidden">
+                      {result.image ? (
+                        <img 
+                          src={result.image}
+                          alt={result.title}
+                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center">
+                          <div class="w-16 h-10 bg-gradient-to-br from-primary-400 to-accent-400 rounded shadow-lg"></div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <!-- Result Content -->
+                  <div class="flex-1 space-y-3">
+                    <!-- Meta info -->
+                    <div class="flex items-center space-x-4 text-sm">
+                      <span class={`px-2 py-1 rounded-full text-xs font-medium ${
+                        result.type === 'switch' ? 'bg-primary-500/20 text-primary-300' :
+                        result.type === 'tutorial' ? 'bg-green-500/20 text-green-300' :
+                        'bg-accent-500/20 text-accent-300'
+                      }`}>
+                        {result.category}
+                      </span>
+                      <span class="text-muted-foreground">•</span>
+                      <span class="text-muted-foreground">
+                        {new Date(result.date).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                      </span>
+                      {result.rating && (
+                        <>
+                          <span class="text-muted-foreground">•</span>
+                          <div class="flex items-center space-x-1">
+                            <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                            </svg>
+                            <span class="text-yellow-400 font-semibold text-xs">{result.rating}</span>
+                          </div>
+                        </>
+                      )}
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary-400 transition-colors duration-200">
+                      <a href={`/posts/${result.slug}`} class="hover:underline">
+                        {result.title}
+                      </a>
+                    </h2>
+
+                    <!-- Excerpt -->
+                    <p class="text-muted-foreground leading-relaxed line-clamp-3">
+                      {result.excerpt}
+                    </p>
+
+                    <!-- Read more link -->
+                    <div class="pt-2">
+                      <a 
+                        href={`/posts/${result.slug}`}
+                        class="inline-flex items-center space-x-2 text-primary-400 hover:text-primary-300 font-medium transition-colors duration-200"
+                      >
+                        <span>Read {result.type === 'switch' ? 'Review' : 'Article'}</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <!-- No Results -->
+          <div class="text-center py-12 space-y-6">
+            <div class="text-6xl mb-4">🔍</div>
+            <h2 class="text-2xl font-semibold text-foreground">No results found</h2>
+            <p class="text-lg text-muted-foreground max-w-md mx-auto">
+              We couldn't find anything matching <span class="text-primary-400 font-medium">"{searchQuery}"</span>. 
+              Try different keywords or browse our categories.
+            </p>
+            
+            <!-- Search suggestions -->
+            <div class="pt-8">
+              <h3 class="text-lg font-semibold text-foreground mb-4">Try searching for:</h3>
+              <div class="flex flex-wrap justify-center gap-2">
+                <a href="/search?q=linear switches" class="px-4 py-2 text-sm bg-primary-500/20 text-primary-300 border border-primary-500/30 rounded-lg hover:bg-primary-500/30 transition-colors duration-200">
+                  linear switches
+                </a>
+                <a href="/search?q=tactile switches" class="px-4 py-2 text-sm bg-accent-500/20 text-accent-300 border border-accent-500/30 rounded-lg hover:bg-accent-500/30 transition-colors duration-200">
+                  tactile switches
+                </a>
+                <a href="/search?q=cherry mx" class="px-4 py-2 text-sm bg-green-500/20 text-green-300 border border-green-500/30 rounded-lg hover:bg-green-500/30 transition-colors duration-200">
+                  cherry mx
+                </a>
+                <a href="/search?q=gateron" class="px-4 py-2 text-sm bg-yellow-500/20 text-yellow-300 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/30 transition-colors duration-200">
+                  gateron
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    )}
+
+    {!searchQuery && (
+      <!-- Popular Searches / Categories when no search query -->
+      <div class="space-y-8">
+        <!-- Popular Searches -->
+        <section class="space-y-4">
+          <h2 class="text-2xl font-bold text-gradient">Popular Searches</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <a href="/search?q=linear switches" class="p-4 glass-dark rounded-lg hover:scale-105 transition-all duration-200 group">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-primary-500/20 rounded-lg flex items-center justify-center">
+                  <span class="text-lg">📏</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-foreground group-hover:text-primary-400 transition-colors duration-200">Linear Switches</h3>
+                  <p class="text-sm text-muted-foreground">Smooth, consistent keypresses</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="/search?q=tactile switches" class="p-4 glass-dark rounded-lg hover:scale-105 transition-all duration-200 group">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-accent-500/20 rounded-lg flex items-center justify-center">
+                  <span class="text-lg">⚡</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-foreground group-hover:text-accent-400 transition-colors duration-200">Tactile Switches</h3>
+                  <p class="text-sm text-muted-foreground">Feel the bump without the click</p>
+                </div>
+              </div>
+            </a>
+            
+            <a href="/search?q=clicky switches" class="p-4 glass-dark rounded-lg hover:scale-105 transition-all duration-200 group">
+              <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span class="text-lg">🔊</span>
+                </div>
+                <div>
+                  <h3 class="font-semibold text-foreground group-hover:text-green-400 transition-colors duration-200">Clicky Switches</h3>
+                  <p class="text-sm text-muted-foreground">Audible and tactile feedback</p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- Browse by Manufacturer -->
+        <section class="space-y-4">
+          <h2 class="text-2xl font-bold text-gradient">Browse by Manufacturer</h2>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {['Cherry', 'Gateron', 'Kailh', 'ZealPC', 'Durock', 'NovelKeys'].map(manufacturer => (
+              <a 
+                key={manufacturer}
+                href={`/search?q=${manufacturer.toLowerCase()}`} 
+                class="p-3 text-center glass-dark rounded-lg hover:scale-105 hover:border-primary-400 transition-all duration-200 group"
+              >
+                <h3 class="font-semibold text-foreground group-hover:text-primary-400 transition-colors duration-200">
+                  {manufacturer}
+                </h3>
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  /* Line clamp utility */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Search result hover effects */
+  .glass-dark:hover {
+    border-color: rgba(58, 155, 220, 0.3);
+  }
+
+  /* Enhanced focus styles for search input */
+  input[type="search"]:focus {
+    box-shadow: 0 0 0 3px rgba(58, 155, 220, 0.1), 0 0 20px rgba(58, 155, 220, 0.2);
+  }
+</style>
+
+<script>
+  // Search functionality
+  const searchForm = document.querySelector('form');
+  const searchInput = searchForm?.querySelector('input[name="q"]');
+  
+  // Auto-focus search input if no query
+  if (!searchInput?.value) {
+    searchInput?.focus();
+  }
+  
+  // Handle search suggestions
+  const suggestionLinks = document.querySelectorAll('[href^="/search?q="]');
+  suggestionLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      // Add a subtle loading effect
+      const originalText = link.textContent;
+      link.textContent = 'Searching...';
+      setTimeout(() => {
+        link.textContent = originalText;
+      }, 100);
+    });
+  });
+</script>

@@ -1,0 +1,339 @@
+---
+// BaseLayout.astro - Main layout with header, sidebar, and footer
+import Header from '../components/Header.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  showSidebar?: boolean;
+  posts?: any[];
+  popularSwitches?: any[];
+}
+
+const {
+  title = 'Thockverse - Mechanical Keyboard Switch Reviews',
+  description = 'Your ultimate destination for mechanical keyboard switch reviews, comparisons, and guides. Exploring the universe of switches, one thock at a time.',
+  image = '/images/og-image.jpg',
+  type = 'website',
+  showSidebar = true,
+  posts = [],
+  popularSwitches = []
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImage = new URL(image, Astro.url);
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content="Thockverse" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0D0D0F" />
+    <meta name="color-scheme" content="dark light" />
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" as="style" />
+    
+    <!-- RSS Feed -->
+    <link rel="alternate" type="application/rss+xml" title="Thockverse RSS Feed" href="/rss.xml" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Thockverse",
+        "description": "Mechanical keyboard switch reviews and guides",
+        "url": "https://thockverse.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://thockverse.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+  </head>
+
+  <body class="starfield">
+    <!-- Skip to content for accessibility -->
+    <a 
+      href="#main-content" 
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 z-50 px-4 py-2 bg-primary-500 text-white rounded-lg"
+    >
+      Skip to content
+    </a>
+
+    <!-- Header -->
+    <Header />
+
+    <!-- Main Layout -->
+    <div class="flex min-h-screen pt-16">
+      <!-- Sidebar -->
+      {showSidebar && (
+        <div class="hidden lg:block flex-shrink-0">
+          <div class="w-80 fixed top-20 h-[calc(100vh-5rem)] overflow-y-auto scrollbar-thin">
+            <Sidebar posts={posts} popularSwitches={popularSwitches} />
+          </div>
+        </div>
+      )}
+
+      <!-- Mobile Sidebar Overlay -->
+      {showSidebar && (
+        <div id="sidebar-overlay" class="lg:hidden fixed inset-0 z-30 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300">
+          <div class="w-80">
+            <Sidebar posts={posts} popularSwitches={popularSwitches} />
+          </div>
+        </div>
+      )}
+
+      <!-- Main Content -->
+      <main 
+        id="main-content"
+        class={`flex-1 ${showSidebar ? 'lg:ml-80' : ''} min-h-screen`}
+      >
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <Footer />
+
+    <!-- Loading indicator for page transitions -->
+    <div id="page-loader" class="fixed top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-500 to-accent-500 transform -translate-x-full transition-transform duration-300 z-50"></div>
+
+    <!-- Back to Top Button -->
+    <button 
+      id="back-to-top"
+      class="fixed bottom-8 right-8 p-3 rounded-full glass-dark hover:bg-primary-500/20 transition-all duration-300 opacity-0 pointer-events-none z-40"
+      aria-label="Back to top"
+    >
+      <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+      </svg>
+    </button>
+
+    <script>
+      // Theme initialization (prevent FOUC)
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        // Default to dark theme for space aesthetic
+        const theme = savedTheme || 'dark';
+        
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.classList.remove('light');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        }
+      })();
+
+      // Back to top button functionality
+      const backToTop = document.getElementById('back-to-top');
+      
+      function toggleBackToTop() {
+        if (window.pageYOffset > 300) {
+          backToTop?.classList.remove('opacity-0', 'pointer-events-none');
+          backToTop?.classList.add('opacity-100');
+        } else {
+          backToTop?.classList.add('opacity-0', 'pointer-events-none');
+          backToTop?.classList.remove('opacity-100');
+        }
+      }
+      
+      window.addEventListener('scroll', toggleBackToTop);
+      
+      backToTop?.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Page loading indicator
+      let isLoading = false;
+      const pageLoader = document.getElementById('page-loader');
+      
+      function showLoader() {
+        if (!isLoading) {
+          isLoading = true;
+          pageLoader?.classList.remove('-translate-x-full');
+          setTimeout(() => {
+            if (isLoading) {
+              pageLoader?.classList.add('-translate-x-full');
+              isLoading = false;
+            }
+          }, 500);
+        }
+      }
+
+      // Show loader on navigation
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link && link.href && !link.href.includes('#') && link.hostname === window.location.hostname) {
+          showLoader();
+        }
+      });
+
+      // Mobile sidebar overlay functionality
+      const sidebarOverlay = document.getElementById('sidebar-overlay');
+      const sidebarToggle = document.getElementById('sidebar-toggle');
+      
+      function showSidebarOverlay() {
+        sidebarOverlay?.classList.remove('pointer-events-none', 'opacity-0');
+        sidebarOverlay?.classList.add('opacity-100');
+        document.body.style.overflow = 'hidden';
+      }
+      
+      function hideSidebarOverlay() {
+        sidebarOverlay?.classList.add('pointer-events-none', 'opacity-0');
+        sidebarOverlay?.classList.remove('opacity-100');
+        document.body.style.overflow = '';
+      }
+      
+      // Close overlay when clicking outside
+      sidebarOverlay?.addEventListener('click', (e) => {
+        if (e.target === sidebarOverlay) {
+          hideSidebarOverlay();
+        }
+      });
+
+      // Keyboard accessibility
+      document.addEventListener('keydown', (e) => {
+        // Close overlay with Escape key
+        if (e.key === 'Escape' && !sidebarOverlay?.classList.contains('opacity-0')) {
+          hideSidebarOverlay();
+        }
+        
+        // Back to top with keyboard shortcut (Shift + T)
+        if (e.shiftKey && e.key === 'T') {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      // Smooth scroll for anchor links
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (link?.href?.includes('#')) {
+          const url = new URL(link.href);
+          if (url.pathname === window.location.pathname && url.hash) {
+            e.preventDefault();
+            const target = document.querySelector(url.hash);
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        }
+      });
+
+      // Performance optimization: Reduce animations on slow devices
+      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) {
+        document.documentElement.classList.add('reduce-motion');
+      }
+
+      // Service Worker registration (for future PWA features)
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', async () => {
+          try {
+            // We'll add this in a future iteration
+            // await navigator.serviceWorker.register('/sw.js');
+          } catch (error) {
+            console.log('ServiceWorker registration failed');
+          }
+        });
+      }
+    </script>
+
+    <style>
+      /* Screen reader only utility */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      
+      .focus\:not-sr-only:focus {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 1rem;
+        margin: 0;
+        overflow: visible;
+        clip: auto;
+        white-space: normal;
+      }
+      
+      /* Reduce motion for users who prefer it */
+      .reduce-motion *,
+      .reduce-motion *::before,
+      .reduce-motion *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      /* Custom focus outline */
+      *:focus-visible {
+        outline: 2px solid #3A9BDC;
+        outline-offset: 2px;
+      }
+      
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .glass,
+        .glass-dark {
+          border-width: 2px !important;
+          border-color: currentColor !important;
+        }
+      }
+      
+      /* Print styles */
+      @media print {
+        .starfield::before {
+          display: none !important;
+        }
+        
+        #back-to-top,
+        #sidebar-overlay {
+          display: none !important;
+        }
+      }
+    </style>
+  </body>
+</html>

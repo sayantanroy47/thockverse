@@ -1,0 +1,87 @@
+---
+// Breadcrumbs.astro - Navigation breadcrumbs with space theme
+interface Props {
+  paths: Array<{
+    name: string;
+    href?: string;
+    current?: boolean;
+  }>;
+}
+
+const { paths } = Astro.props;
+
+// Always include Home as the first breadcrumb
+const fullPaths = [
+  { name: 'Home', href: '/' },
+  ...paths
+];
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="flex items-center space-x-2 text-sm">
+    {fullPaths.map((path, index) => (
+      <li key={index} class="flex items-center space-x-2">
+        {index > 0 && (
+          <svg 
+            class="w-4 h-4 text-muted-foreground breadcrumb-separator"
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        )}
+        
+        {path.current || !path.href ? (
+          <span 
+            class={`font-medium ${path.current ? 'text-primary-400' : 'text-muted-foreground'}`}
+            aria-current={path.current ? 'page' : undefined}
+          >
+            {path.name}
+          </span>
+        ) : (
+          <a 
+            href={path.href}
+            class="text-muted-foreground hover:text-primary-400 transition-colors duration-200 font-medium"
+          >
+            {path.name}
+          </a>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs {
+    @apply mb-6;
+  }
+  
+  /* Hover effect for links */
+  .breadcrumbs a:hover {
+    text-shadow: 0 0 8px rgba(58, 155, 220, 0.3);
+  }
+  
+  /* Responsive behavior */
+  @media (max-width: 640px) {
+    .breadcrumbs {
+      @apply mb-4;
+    }
+    
+    .breadcrumbs ol {
+      @apply text-xs;
+    }
+    
+    /* Hide middle breadcrumbs on very small screens, keep first and last */
+    .breadcrumbs li:not(:first-child):not(:last-child) {
+      @apply hidden;
+    }
+    
+    /* Show ellipsis when hiding breadcrumbs */
+    .breadcrumbs li:first-child:not(:last-child):after {
+      content: "…";
+      @apply text-muted-foreground/70 mx-2;
+    }
+  }
+</style>

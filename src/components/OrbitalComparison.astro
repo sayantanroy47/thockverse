@@ -1,0 +1,507 @@
+---
+// OrbitalComparison.astro - Interactive orbital switch comparison tool
+interface Props {
+  switches?: any[];
+}
+
+const { switches = [] } = Astro.props;
+
+// Sample switches for the orbital comparison
+const availableSwitches = switches.length > 0 ? switches : [
+  {
+    id: 'cherry-mx-blue',
+    name: 'Cherry MX Blue',
+    type: 'Clicky',
+    actuationForce: '50g',
+    rating: 8.5,
+    color: '#4F46E5'
+  },
+  {
+    id: 'gateron-oil-kings',
+    name: 'Gateron Oil Kings',
+    type: 'Linear',
+    actuationForce: '45g',
+    rating: 9.2,
+    color: '#059669'
+  },
+  {
+    id: 'holy-panda',
+    name: 'Holy Panda',
+    type: 'Tactile',
+    actuationForce: '67g',
+    rating: 9.0,
+    color: '#DC2626'
+  },
+  {
+    id: 'alpaca-v2',
+    name: 'Alpaca V2',
+    type: 'Linear',
+    actuationForce: '62g',
+    rating: 8.8,
+    color: '#7C3AED'
+  },
+  {
+    id: 'zealios-v2',
+    name: 'Zealios V2',
+    type: 'Tactile',
+    actuationForce: '65g',
+    rating: 8.7,
+    color: '#EA580C'
+  },
+  {
+    id: 'tealios-v2',
+    name: 'Tealios V2',
+    type: 'Linear',
+    actuationForce: '67g',
+    rating: 8.6,
+    color: '#0891B2'
+  }
+];
+---
+
+<div class="orbital-comparison w-full" id="orbital-comparison">
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-8">
+    <div class="space-y-2">
+      <h2 class="text-3xl font-bold text-gradient">Orbital Switch Comparison</h2>
+      <p class="text-space-gray-300">Drag switches into orbit around the center planet to compare their specifications</p>
+    </div>
+    
+    <!-- Controls -->
+    <div class="flex items-center space-x-4">
+      <button 
+        id="clear-orbit" 
+        class="px-4 py-2 text-sm bg-red-500/20 text-red-300 border border-red-500/30 rounded-lg hover:bg-red-500/30 transition-colors duration-200"
+      >
+        Clear Orbit
+      </button>
+      <button 
+        id="auto-orbit" 
+        class="px-4 py-2 text-sm bg-primary-500/20 text-primary-300 border border-primary-500/30 rounded-lg hover:bg-primary-500/30 transition-colors duration-200"
+      >
+        Auto Arrange
+      </button>
+    </div>
+  </div>
+
+  <div class="glass-dark rounded-2xl p-8 overflow-hidden">
+    <!-- Orbital System -->
+    <div class="relative">
+      <!-- Central Planet -->
+      <div class="orbital-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+        <div class="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary-500 via-accent-500 to-primary-600 shadow-2xl neon-glow">
+          <!-- Planet surface details -->
+          <div class="absolute inset-2 rounded-full bg-gradient-to-br from-primary-400/20 to-accent-400/20 backdrop-blur-sm"></div>
+          <div class="absolute top-4 left-6 w-3 h-3 rounded-full bg-primary-300/40"></div>
+          <div class="absolute bottom-6 right-4 w-2 h-2 rounded-full bg-accent-300/40"></div>
+          
+          <!-- Planet label -->
+          <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs font-medium text-space-gray-400 whitespace-nowrap">
+            Comparison Center
+          </div>
+        </div>
+      </div>
+
+      <!-- Orbital Paths (visual guides) -->
+      <div class="orbital-paths absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div class="orbit-ring w-64 h-64 rounded-full border border-primary-500/20 animate-pulse"></div>
+        <div class="orbit-ring w-80 h-80 rounded-full border border-accent-500/20 animate-pulse absolute -top-8 -left-8" style="animation-delay: 0.5s;"></div>
+        <div class="orbit-ring w-96 h-96 rounded-full border border-primary-500/10 animate-pulse absolute -top-16 -left-16" style="animation-delay: 1s;"></div>
+      </div>
+
+      <!-- Drop Zone for Orbital Area -->
+      <div 
+        id="orbital-zone" 
+        class="orbital-zone w-full h-96 relative border-2 border-dashed border-space-gray-200/30 rounded-2xl flex items-center justify-center transition-colors duration-300"
+        data-drop-zone="true"
+      >
+        <div class="text-center text-space-gray-400 pointer-events-none">
+          <div class="text-4xl mb-2">🚀</div>
+          <p class="text-sm">Drag switches here to add them to orbit</p>
+        </div>
+      </div>
+
+      <!-- Orbiting Switches Container -->
+      <div id="orbiting-switches" class="absolute inset-0 pointer-events-none">
+        <!-- Orbiting switches will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Available Switches -->
+  <div class="mt-8">
+    <h3 class="text-xl font-bold text-space-white mb-4">Available Switches</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      {availableSwitches.map((switchItem) => (
+        <div 
+          key={switchItem.id}
+          class="switch-item cursor-move p-4 glass rounded-xl hover:scale-105 transition-all duration-200 group"
+          draggable="true"
+          data-switch-id={switchItem.id}
+          data-switch-data={JSON.stringify(switchItem)}
+        >
+          <!-- Switch Visual -->
+          <div class="w-full h-12 bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-lg mb-3 flex items-center justify-center relative overflow-hidden">
+            <div 
+              class="w-8 h-5 rounded shadow-lg"
+              style={`background: linear-gradient(135deg, ${switchItem.color}80, ${switchItem.color})`}
+            ></div>
+            <!-- Drag indicator -->
+            <div class="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <svg class="w-3 h-3 text-space-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Switch Info -->
+          <div class="space-y-1">
+            <h4 class="font-semibold text-sm text-space-white group-hover:text-primary-400 transition-colors duration-200 line-clamp-2">
+              {switchItem.name}
+            </h4>
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-space-gray-400">{switchItem.type}</span>
+              <span class="text-accent-400 font-semibold">{switchItem.rating}</span>
+            </div>
+            <div class="text-xs text-space-gray-500">
+              {switchItem.actuationForce}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Comparison Panel -->
+  <div id="comparison-panel" class="mt-8 hidden">
+    <div class="spec-glow rounded-2xl p-6">
+      <h3 class="text-xl font-bold text-space-white mb-4 flex items-center space-x-2">
+        <svg class="w-5 h-5 text-primary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+        </svg>
+        <span>Switch Comparison</span>
+      </div>
+      
+      <div id="comparison-table" class="overflow-x-auto">
+        <!-- Comparison table will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  class OrbitalComparison {
+    constructor() {
+      this.orbitalZone = document.getElementById('orbital-zone');
+      this.orbitingSwitches = document.getElementById('orbiting-switches');
+      this.comparisonPanel = document.getElementById('comparison-panel');
+      this.comparisonTable = document.getElementById('comparison-table');
+      this.switchItems = document.querySelectorAll('.switch-item');
+      this.clearButton = document.getElementById('clear-orbit');
+      this.autoButton = document.getElementById('auto-orbit');
+      
+      this.orbitingData = [];
+      this.orbitRadius = [120, 160, 200]; // Different orbital distances
+      this.orbitSpeed = [20, 25, 30]; // Different orbital speeds (seconds)
+      
+      this.init();
+    }
+    
+    init() {
+      this.setupDragAndDrop();
+      this.setupControls();
+    }
+    
+    setupDragAndDrop() {
+      // Add drag events to switch items
+      this.switchItems.forEach(item => {
+        item.addEventListener('dragstart', this.handleDragStart.bind(this));
+        item.addEventListener('dragend', this.handleDragEnd.bind(this));
+      });
+      
+      // Add drop events to orbital zone
+      this.orbitalZone.addEventListener('dragover', this.handleDragOver.bind(this));
+      this.orbitalZone.addEventListener('drop', this.handleDrop.bind(this));
+      this.orbitalZone.addEventListener('dragenter', this.handleDragEnter.bind(this));
+      this.orbitalZone.addEventListener('dragleave', this.handleDragLeave.bind(this));
+    }
+    
+    setupControls() {
+      this.clearButton?.addEventListener('click', this.clearOrbit.bind(this));
+      this.autoButton?.addEventListener('click', this.autoArrange.bind(this));
+    }
+    
+    handleDragStart(e) {
+      const switchData = JSON.parse(e.target.dataset.switchData);
+      e.dataTransfer.setData('application/json', JSON.stringify(switchData));
+      e.target.style.opacity = '0.5';
+    }
+    
+    handleDragEnd(e) {
+      e.target.style.opacity = '1';
+    }
+    
+    handleDragOver(e) {
+      e.preventDefault();
+      return false;
+    }
+    
+    handleDragEnter(e) {
+      e.preventDefault();
+      this.orbitalZone.classList.add('border-primary-500/50', 'bg-primary-500/5');
+    }
+    
+    handleDragLeave(e) {
+      // Only remove highlight if we're actually leaving the zone
+      if (!this.orbitalZone.contains(e.relatedTarget)) {
+        this.orbitalZone.classList.remove('border-primary-500/50', 'bg-primary-500/5');
+      }
+    }
+    
+    handleDrop(e) {
+      e.preventDefault();
+      this.orbitalZone.classList.remove('border-primary-500/50', 'bg-primary-500/5');
+      
+      try {
+        const switchData = JSON.parse(e.dataTransfer.getData('application/json'));
+        this.addToOrbit(switchData);
+      } catch (error) {
+        console.error('Error parsing switch data:', error);
+      }
+    }
+    
+    addToOrbit(switchData) {
+      // Check if switch is already in orbit
+      if (this.orbitingData.find(item => item.id === switchData.id)) {
+        return;
+      }
+      
+      // Add to orbiting data
+      this.orbitingData.push(switchData);
+      
+      // Create orbital element
+      this.createOrbitalElement(switchData, this.orbitingData.length - 1);
+      
+      // Update comparison panel
+      this.updateComparisonPanel();
+      
+      // Hide instructions if this is the first switch
+      if (this.orbitingData.length === 1) {
+        this.orbitalZone.querySelector('div').style.opacity = '0.2';
+      }
+    }
+    
+    createOrbitalElement(switchData, index) {
+      const orbital = document.createElement('div');
+      orbital.className = 'orbital-switch absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-auto cursor-pointer';
+      orbital.dataset.switchId = switchData.id;
+      
+      const radiusIndex = index % 3;
+      const radius = this.orbitRadius[radiusIndex];
+      const speed = this.orbitSpeed[radiusIndex];
+      const startAngle = (index * 120) % 360; // Distribute switches around orbit
+      
+      orbital.innerHTML = `
+        <div class="orbital-path" style="
+          width: ${radius * 2}px; 
+          height: ${radius * 2}px;
+          animation: orbit ${speed}s linear infinite;
+          animation-delay: -${startAngle / 360 * speed}s;
+        ">
+          <div class="switch-in-orbit relative w-12 h-12 transform -translate-x-1/2 -translate-y-1/2" 
+               style="
+                 left: ${radius}px;
+                 background: linear-gradient(135deg, ${switchData.color}80, ${switchData.color});
+               ">
+            <div class="w-full h-full rounded-lg shadow-lg flex items-center justify-center border-2 border-white/20 hover:border-white/40 transition-colors duration-200 group">
+              <div class="w-6 h-4 bg-white/80 rounded-sm"></div>
+            </div>
+            
+            <!-- Switch info tooltip -->
+            <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 bg-space-black/90 backdrop-blur-sm rounded-lg px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+              <div class="text-xs font-semibold text-space-white">${switchData.name}</div>
+              <div class="text-2xs text-space-gray-300">${switchData.type} • ${switchData.actuationForce}</div>
+            </div>
+            
+            <!-- Remove button -->
+            <button class="remove-switch absolute -top-2 -right-2 w-5 h-5 bg-red-500 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:bg-red-400">
+              <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Add remove functionality
+      orbital.querySelector('.remove-switch').addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.removeFromOrbit(switchData.id);
+      });
+      
+      this.orbitingSwitches.appendChild(orbital);
+    }
+    
+    removeFromOrbit(switchId) {
+      // Remove from data
+      this.orbitingData = this.orbitingData.filter(item => item.id !== switchId);
+      
+      // Remove from DOM
+      const orbital = this.orbitingSwitches.querySelector(`[data-switch-id="${switchId}"]`);
+      if (orbital) {
+        orbital.remove();
+      }
+      
+      // Update comparison panel
+      this.updateComparisonPanel();
+      
+      // Show instructions if no switches left
+      if (this.orbitingData.length === 0) {
+        this.orbitalZone.querySelector('div').style.opacity = '1';
+      }
+    }
+    
+    clearOrbit() {
+      this.orbitingData = [];
+      this.orbitingSwitches.innerHTML = '';
+      this.updateComparisonPanel();
+      this.orbitalZone.querySelector('div').style.opacity = '1';
+    }
+    
+    autoArrange() {
+      // Clear current orbit
+      this.clearOrbit();
+      
+      // Add first 3 switches automatically
+      const switchesToAdd = [...this.switchItems].slice(0, 3);
+      switchesToAdd.forEach((item, index) => {
+        setTimeout(() => {
+          const switchData = JSON.parse(item.dataset.switchData);
+          this.addToOrbit(switchData);
+        }, index * 500);
+      });
+    }
+    
+    updateComparisonPanel() {
+      if (this.orbitingData.length === 0) {
+        this.comparisonPanel.classList.add('hidden');
+        return;
+      }
+      
+      this.comparisonPanel.classList.remove('hidden');
+      
+      const table = `
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-space-gray-200">
+              <th class="text-left py-2 text-space-gray-400">Property</th>
+              ${this.orbitingData.map(sw => `
+                <th class="text-center py-2 text-space-white">${sw.name}</th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody class="space-y-2">
+            <tr class="border-b border-space-gray-100">
+              <td class="py-2 font-medium text-space-gray-300">Type</td>
+              ${this.orbitingData.map(sw => `
+                <td class="text-center py-2 text-space-white">${sw.type}</td>
+              `).join('')}
+            </tr>
+            <tr class="border-b border-space-gray-100">
+              <td class="py-2 font-medium text-space-gray-300">Actuation Force</td>
+              ${this.orbitingData.map(sw => `
+                <td class="text-center py-2 text-space-white">${sw.actuationForce}</td>
+              `).join('')}
+            </tr>
+            <tr class="border-b border-space-gray-100">
+              <td class="py-2 font-medium text-space-gray-300">Rating</td>
+              ${this.orbitingData.map(sw => `
+                <td class="text-center py-2">
+                  <span class="text-yellow-400 font-semibold">${sw.rating}</span>
+                </td>
+              `).join('')}
+            </tr>
+          </tbody>
+        </table>
+      `;
+      
+      this.comparisonTable.innerHTML = table;
+    }
+  }
+  
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new OrbitalComparison();
+  });
+</script>
+
+<style>
+  /* Orbital animation */
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .orbital-path {
+    animation-timing-function: linear;
+  }
+  
+  .switch-in-orbit {
+    animation: counter-rotate 20s linear infinite reverse;
+  }
+  
+  @keyframes counter-rotate {
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(-360deg);
+    }
+  }
+  
+  /* Drag and drop styles */
+  .switch-item:hover {
+    cursor: grab;
+  }
+  
+  .switch-item:active {
+    cursor: grabbing;
+  }
+  
+  /* Orbit rings pulse animation */
+  .orbit-ring {
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .orbital-zone {
+      height: 24rem;
+    }
+    
+    .orbital-center .w-24 {
+      width: 4rem;
+      height: 4rem;
+    }
+    
+    .orbit-ring {
+      width: 12rem !important;
+      height: 12rem !important;
+    }
+    
+    .orbit-ring:nth-child(2) {
+      width: 16rem !important;
+      height: 16rem !important;
+    }
+    
+    .orbit-ring:nth-child(3) {
+      width: 20rem !important;
+      height: 20rem !important;
+    }
+  }
+</style>

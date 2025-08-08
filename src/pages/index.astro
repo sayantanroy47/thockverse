@@ -1,0 +1,379 @@
+---
+// Homepage - Featured review and latest posts grid
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// This will be implemented with Astro content collections later
+// For now, using sample data from our markdown files
+const featuredPost = {
+  title: "Cherry MX Blue Review: The Clicky Typing Icon",
+  description: "The definitive clicky switch that started it all. Beloved by typists for its audible and tactile feedback, though definitely not for quiet environments.",
+  slug: "cherry-mx-blue",
+  image: "/images/cherry-mx-blue-hero.jpg",
+  rating: 8.5,
+  category: "switches",
+  date: "2025-08-07",
+  author: "Switch Expert"
+};
+
+const latestPosts = [
+  {
+    title: "Gateron Oil Kings: The Deep Thock Experience",
+    description: "Deep-sounding linear switch with a premium feel.",
+    slug: "gateron-oil-kings", 
+    image: "/images/gateron-oil-kings-card.jpg",
+    rating: 9.2,
+    category: "switches",
+    date: "2025-08-06",
+    author: "Thock Guru"
+  },
+  {
+    title: "Holy Panda: The Legendary Tactile Switch",
+    description: "The most hyped tactile switch ever.",
+    slug: "holy-panda",
+    image: "/images/holy-panda-card.jpg", 
+    rating: 9.0,
+    category: "switches",
+    date: "2025-08-05",
+    author: "Switch Expert"
+  },
+  {
+    title: "Alpaca V2: Linear Perfection Refined",
+    description: "The updated version of the beloved linear switch.",
+    slug: "alpaca-v2",
+    image: "/images/alpaca-v2-card.jpg",
+    rating: 8.8,
+    category: "switches", 
+    date: "2025-08-04",
+    author: "Linear Specialist"
+  },
+  {
+    title: "Zealios V2: Tactile Excellence",
+    description: "Premium tactile switches with customizable weight options.",
+    slug: "zealios-v2",
+    image: "/images/zealios-v2-card.jpg",
+    rating: 8.7,
+    category: "switches",
+    date: "2025-08-03",
+    author: "Tactile Master"
+  },
+  {
+    title: "Tofu65 Gasket Upgrade: Transformation Guide",
+    description: "How to transform your Tofu65 into a gasket-mount wonder.",
+    slug: "tofu65-gasket-upgrade",
+    image: "/images/tofu65-upgrade-card.jpg",
+    rating: 8.9,
+    category: "tutorials",
+    date: "2025-08-02", 
+    author: "Build Expert"
+  },
+  {
+    title: "Tealios V2: Smooth Operator",
+    description: "The smoothest linear switch in Zeal's lineup.",
+    slug: "tealios-v2",
+    image: "/images/tealios-v2-card.jpg",
+    rating: 8.6,
+    category: "switches",
+    date: "2025-08-01",
+    author: "Linear Specialist"
+  }
+];
+
+const stats = [
+  { label: "Switch Reviews", value: "150+", icon: "⚡" },
+  { label: "Keyboards Tested", value: "75+", icon: "⌨️" },
+  { label: "Community Members", value: "25K+", icon: "👥" },
+  { label: "Sound Samples", value: "200+", icon: "🔊" }
+];
+---
+
+<BaseLayout 
+  title="Thockverse - Mechanical Keyboard Switch Reviews & Guides"
+  description="Your ultimate destination for mechanical keyboard switch reviews, comparisons, and guides. Exploring the universe of switches, one thock at a time."
+  posts={latestPosts}
+>
+  <div class="space-y-16">
+    <!-- Hero Section -->
+    <section class="text-center space-y-8 py-12 relative">
+      <!-- Floating particles -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-10 w-2 h-2 bg-primary-400 rounded-full animate-pulse float-animation"></div>
+        <div class="absolute top-32 right-16 w-1 h-1 bg-accent-400 rounded-full animate-pulse float-animation"></div>
+        <div class="absolute top-16 right-32 w-3 h-3 bg-primary-300 rounded-full animate-pulse float-animation"></div>
+        <div class="absolute bottom-20 left-20 w-1 h-1 bg-accent-300 rounded-full animate-pulse float-animation"></div>
+      </div>
+      
+      <div class="relative z-10">
+        <h1 class="text-6xl lg:text-7xl font-bold text-gradient mb-6 leading-tight">
+          Welcome to<br/>
+          <span class="relative">
+            THOCKVERSE
+            <!-- Orbiting elements around title -->
+            <div class="absolute -top-8 -right-8 w-12 h-12">
+              <div class="orbital">
+                <div class="w-6 h-4 bg-gradient-to-br from-primary-400 to-accent-400 rounded shadow-lg neon-glow"></div>
+              </div>
+            </div>
+          </span>
+        </h1>
+        
+        <p class="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
+          Your ultimate destination for mechanical keyboard switch reviews, comparisons, and guides. 
+          Exploring the universe of switches, one <em class="text-primary-400 font-semibold">thock</em> at a time.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="/switches" class="btn-glow text-lg">
+            Explore Switches
+          </a>
+          <a 
+            href="/latest"
+            class="px-8 py-3 text-lg font-medium border border-primary-500/50 rounded-lg hover:border-primary-400 hover:bg-primary-500/10 transition-all duration-300"
+          >
+            Latest Reviews
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat, index) => (
+          <div key={index} class="text-center space-y-2 p-6 glass-dark rounded-xl float-animation hover:scale-105 transition-transform duration-300">
+            <div class="text-3xl mb-2">{stat.icon}</div>
+            <div class="text-2xl lg:text-3xl font-bold text-gradient">{stat.value}</div>
+            <div class="text-sm text-muted-foreground">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Featured Review -->
+    <section class="space-y-6">
+      <div class="flex items-center space-x-3">
+        <div class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
+        <h2 class="text-3xl font-bold text-gradient">Featured Review</h2>
+      </div>
+      
+      <div class="glass-dark rounded-2xl overflow-hidden hover:scale-[1.02] transition-all duration-500 group">
+        <div class="lg:flex">
+          <!-- Featured Image -->
+          <div class="lg:w-1/2 relative">
+            <div class="aspect-video lg:aspect-square bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center overflow-hidden">
+              {featuredPost.image ? (
+                <img 
+                  src={featuredPost.image}
+                  alt={featuredPost.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="eager"
+                />
+              ) : (
+                <div class="w-24 h-16 bg-gradient-to-br from-primary-400 to-accent-400 rounded-lg shadow-2xl neon-glow"></div>
+              )}
+            </div>
+            
+            <!-- Rating Badge -->
+            <div class="absolute top-4 right-4 flex items-center space-x-1 px-3 py-1 glass rounded-full">
+              <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+              <span class="font-bold text-yellow-400">{featuredPost.rating}</span>
+            </div>
+          </div>
+          
+          <!-- Featured Content -->
+          <div class="lg:w-1/2 p-8 space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2 text-sm">
+                <span class="px-2 py-1 bg-accent-500/20 text-accent-300 rounded-full text-xs font-medium">
+                  {featuredPost.category}
+                </span>
+                <span class="text-muted-foreground">•</span>
+                <span class="text-muted-foreground">
+                  {new Date(featuredPost.date).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                  })}
+                </span>
+              </div>
+              
+              <h3 class="text-2xl lg:text-3xl font-bold text-foreground group-hover:text-primary-400 transition-colors duration-300">
+                {featuredPost.title}
+              </h3>
+            </div>
+            
+            <p class="text-muted-foreground leading-relaxed">
+              {featuredPost.description}
+            </p>
+            
+            <div class="flex items-center justify-between pt-4">
+              <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                <span>By {featuredPost.author}</span>
+              </div>
+              
+              <a 
+                href={`/posts/${featuredPost.slug}`}
+                class="inline-flex items-center space-x-2 text-primary-400 hover:text-primary-300 font-medium transition-colors duration-200"
+              >
+                <span>Read Review</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Posts Grid -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
+          <h2 class="text-3xl font-bold text-gradient">Latest Reviews</h2>
+        </div>
+        <a 
+          href="/posts"
+          class="text-primary-400 hover:text-primary-300 font-medium transition-colors duration-200"
+        >
+          View All →
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {latestPosts.map((post, index) => (
+          <article key={index} class={`switch-card group cursor-pointer float-animation`} style={`animation-delay: ${index * 0.1}s`}>
+            <!-- Post Image -->
+            <div class="aspect-video bg-gradient-to-br from-primary-500/20 to-accent-500/20 rounded-lg mb-4 overflow-hidden">
+              {post.image ? (
+                <img 
+                  src={post.image}
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <div class="w-16 h-10 bg-gradient-to-br from-primary-400 to-accent-400 rounded shadow-lg"></div>
+                </div>
+              )}
+            </div>
+            
+            <!-- Post Meta -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-sm">
+                <span class="px-2 py-1 bg-primary-500/20 text-primary-300 rounded-full text-xs font-medium">
+                  {post.category}
+                </span>
+                <div class="flex items-center space-x-1">
+                  <svg class="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                  <span class="font-semibold text-yellow-400 text-xs">{post.rating}</span>
+                </div>
+              </div>
+              
+              <h3 class="font-bold text-foreground group-hover:text-primary-400 transition-colors duration-200 line-clamp-2">
+                {post.title}
+              </h3>
+              
+              <p class="text-sm text-muted-foreground line-clamp-2">
+                {post.description}
+              </p>
+              
+              <div class="flex items-center justify-between pt-2 text-xs text-muted-foreground">
+                <span>By {post.author}</span>
+                <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+              </div>
+            </div>
+
+            <!-- Hidden link for accessibility and SEO -->
+            <a href={`/posts/${post.slug}`} class="absolute inset-0" aria-label={`Read ${post.title}`}>
+              <span class="sr-only">Read {post.title}</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="text-center py-16">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <div class="space-y-2">
+          <h2 class="text-3xl font-bold text-gradient">Stay in the Loop</h2>
+          <p class="text-lg text-muted-foreground">
+            Get the latest switch reviews, keyboard news, and exclusive guides delivered to your inbox.
+          </p>
+        </div>
+        
+        <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          <input 
+            type="email" 
+            placeholder="Enter your email"
+            class="flex-1 px-4 py-3 rounded-lg bg-input border border-border text-foreground placeholder-muted-foreground focus-space"
+          />
+          <button class="btn-glow whitespace-nowrap">
+            Subscribe
+          </button>
+        </div>
+        
+        <p class="text-xs text-muted-foreground/70">
+          No spam, unsubscribe anytime. We respect your inbox.
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Enhanced float animations with stagger */
+  .float-animation:nth-child(1) { animation-delay: 0s; }
+  .float-animation:nth-child(2) { animation-delay: 0.2s; }
+  .float-animation:nth-child(3) { animation-delay: 0.4s; }
+  .float-animation:nth-child(4) { animation-delay: 0.6s; }
+  .float-animation:nth-child(5) { animation-delay: 0.8s; }
+  .float-animation:nth-child(6) { animation-delay: 1.0s; }
+  
+  /* Card hover effects */
+  .switch-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .switch-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(58, 155, 220, 0.1), transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .switch-card:hover::before {
+    left: 100%;
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Orbital animation for hero */
+  .orbital {
+    animation: orbit 15s linear infinite;
+  }
+  
+  .orbital:hover {
+    animation-duration: 5s;
+  }
+</style>
