@@ -60,9 +60,9 @@ const socialImage = new URL(image, Astro.url);
     <meta name="theme-color" content="#0D0D0F" />
     <meta name="color-scheme" content="dark light" />
     
-    <!-- Preload Critical Resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" as="style" />
+    <!-- Professional Typography System -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" />
     
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Thockverse RSS Feed" href="/rss.xml" />
@@ -103,15 +103,15 @@ const socialImage = new URL(image, Astro.url);
         id="main-content"
         class={`flex-1 ${showSidebar ? 'lg:mr-80' : ''} min-h-screen`}
       >
-        <div class="max-w-ultra mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-8">
           <slot />
         </div>
       </main>
 
       <!-- Sidebar (Right Side) -->
       {showSidebar && (
-        <div class="hidden lg:block flex-shrink-0">
-          <div class="w-80 fixed top-20 right-0 h-[calc(100vh-5rem)] overflow-hidden">
+        <div class="hidden lg:block flex-shrink-0 w-80">
+          <div class="fixed top-20 right-0 w-80 h-[calc(100vh-5rem)] border-l border-border bg-background/95 backdrop-blur-sm z-40">
             <Sidebar posts={posts} popularSwitches={popularSwitches} />
           </div>
         </div>
@@ -120,7 +120,7 @@ const socialImage = new URL(image, Astro.url);
       <!-- Mobile Sidebar Overlay -->
       {showSidebar && (
         <div id="sidebar-overlay" class="lg:hidden fixed inset-0 z-30 bg-black/50 opacity-0 pointer-events-none transition-opacity duration-300">
-          <div class="w-80">
+          <div class="w-80 h-full overflow-hidden">
             <Sidebar posts={posts} popularSwitches={popularSwitches} />
           </div>
         </div>

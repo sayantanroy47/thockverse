@@ -1,0 +1,7 @@
+---
+// Posts page - redirects to switches
+export const prerender = false;
+
+// Redirect to /switches since posts are now switches
+return Astro.redirect('/switches', 301);
+---

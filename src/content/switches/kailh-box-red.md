@@ -2,7 +2,7 @@
 title: "Kailh Box Red Review: The Protected Gaming Linear"
 description: "Light linear switches with Box protection. Great for gaming with added durability against spills and dust."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Kailh", "Box", "gaming", "light", "protected"]
 specs:

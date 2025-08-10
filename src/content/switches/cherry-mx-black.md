@@ -2,8 +2,9 @@
 title: "Cherry MX Black Review: The Heavy Linear Classic"
 description: "The original Cherry linear switch. Heavy weighting provides controlled typing and reduced accidental actuations, beloved by vintage keyboard enthusiasts."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.0
 tags: ["linear", "Cherry MX", "heavy", "vintage", "smooth", "classic"]
 specs:
   actuationforce: "60g"

@@ -151,13 +151,18 @@
       radial-gradient(1px 1px at 25% 85%, rgba(240, 246, 252, 0.4), transparent);
     background-repeat: repeat;
     background-size: 180px 120px, 220px 140px, 200px 110px, 240px 130px, 270px 150px, 320px 180px, 190px 120px;
-    animation: footer-drift 30s ease-in-out infinite, footer-twinkle 10s ease-in-out infinite;
+    animation: none;
   }
   
 
-  /* Small orbital animation for footer logo */
+  /* Small orbital animation for footer logo - hover triggered */
   .orbital-small {
-    animation: orbit 12s linear infinite;
+    animation: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .orbital-small:hover {
+    animation: orbit 3s linear infinite;
   }
 
   /* Enhanced cosmic drift animation */
@@ -223,11 +228,15 @@
     }
   }
 
-  /* Epic neon pulse animation for social links */
+  /* Epic neon pulse animation for social links - hover triggered */
   .glass {
-    animation: neon-pulse-social 6s ease-in-out infinite;
+    animation: none;
     border: 1px solid transparent;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .glass:hover {
+    animation: neon-pulse-social 3s ease-in-out infinite;
   }
 
   @keyframes neon-pulse-social {

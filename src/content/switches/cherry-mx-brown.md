@@ -2,8 +2,9 @@
 title: "Cherry MX Brown Review: The Versatile Middle Ground"
 description: "The jack-of-all-trades tactile switch. Quiet enough for office use with subtle tactile feedback that works for both typing and gaming."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 7.9
 tags: ["tactile", "Cherry MX", "quiet", "versatile", "office", "balanced"]
 specs:
   actuationforce: "45g"

@@ -2,7 +2,7 @@
 title: "HMX Switch Series Review: The Rising Star of Budget Premium"
 description: "HMX switches are revolutionizing the budget premium segment with exceptional factory lubing, unique materials, and impressive quality control at breakthrough pricing."
 author: "Build Master"
-date: "2025-08-03"
+date: "2024-08-30"
 category: "switches"
 tags: ["HMX", "budget", "linear", "smooth", "factory lubed", "Xinhai", "Macchiato", "Cheese"]
 specs:

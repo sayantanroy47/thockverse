@@ -2,7 +2,7 @@
 title: "Cherry MX Speed Silver Review: The Competitive Edge"
 description: "Engineered for competitive gaming with 40% faster actuation. The shortened travel delivers lightning-fast inputs but requires adjustment for typing."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Cherry MX", "gaming", "speed", "short travel", "competitive"]
 specs:

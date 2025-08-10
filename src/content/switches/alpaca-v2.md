@@ -2,8 +2,9 @@
 title: "Alpaca V2 Review: The Community Favorite Linear"
 description: "Community-designed linears that became legendary. Perfect balance of smoothness, sound, and aesthetics."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.4
 tags: ["linear", "Alpaca", "JWK", "smooth", "thocky", "community"]
 specs:
   actuationforce: "62g"

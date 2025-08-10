@@ -2,8 +2,10 @@
 title: "Holy Panda Review: The Legendary Tactile Switch"
 description: "The most hyped tactile switch ever. Exceptional tactility with legendary thock that started the enthusiast switch craze."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 9.2
+featured: true
 tags: ["tactile", "Holy Panda", "legendary", "frankenswitch", "enthusiast", "thocky"]
 specs:
   actuationforce: "67g"

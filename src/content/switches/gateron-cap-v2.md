@@ -2,7 +2,7 @@
 title: "Gateron CAP V2 Review: The Aerodynamic Innovation"
 description: "Innovative CAP structure with aerodynamic stem holes for enhanced smoothness and stability."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Gateron", "CAP", "innovative", "smooth", "unique"]
 specs:

@@ -2,7 +2,7 @@
 title: "NovelKeys Cream Review: The Self-Lubricating POM Switch"
 description: "All-POM construction creates unique sound and self-lubricating properties. Breaks in beautifully over time for exceptional smoothness."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "NovelKeys", "POM", "cream", "self-lubricating", "unique"]
 specs:

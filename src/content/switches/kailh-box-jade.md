@@ -2,7 +2,7 @@
 title: "Kailh Box Jade Review: The Heavy Clicky Typewriter"
 description: "Heavier click-bar with typewriter-like feedback. Loud, crisp, and incredibly satisfying for clicky enthusiasts."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["clicky", "Kailh", "Box", "heavy", "tactile", "loud"]
 specs:

@@ -2,7 +2,7 @@
 title: "Holy Panda switches are making a comeback in 2025"
 description: "The legendary Holy Panda switches return with improved manufacturing and consistent quality control, maintaining their status as the ultimate tactile switch."
 author: "Switch Master"
-date: "2025-08-06"
+date: "2024-11-15"
 category: "switches"
 tags: ["holy panda", "tactile", "premium", "comeback", "manufacturing"]
 specs:

@@ -2,8 +2,9 @@
 title: "Zealios V2 67g Review: The Tactile Perfection"
 description: "Premium tactile switches with pronounced, rounded bump. The gold standard for tactile enthusiasts seeking maximum feedback without noise."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.7
 tags: ["tactile", "ZealPC", "premium", "zealios", "enthusiast", "purple"]
 specs:
   actuationforce: "67g"

@@ -2,7 +2,7 @@
 title: "Neo Oat Switch Review: Breakfast-Inspired Linear Perfection"
 description: "Breakfast-themed linear switches that deliver exceptional smoothness with a creamy, muted sound profile perfect for morning typing sessions."
 author: "Switch Sensei"
-date: "2025-08-05"
+date: "2024-10-20"
 category: "switches"
 tags: ["linear", "premium", "creamy", "smooth", "JWK", "breakfast switches"]
 specs:

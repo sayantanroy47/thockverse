@@ -1,0 +1,88 @@
+---
+// About page
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About Thockverse | Professional Mechanical Keyboard Reviews" description="Learn about Thockverse - your trusted source for mechanical keyboard switch reviews and guides." showSidebar={false}>
+  <div class="max-w-4xl mx-auto space-y-16">
+    <div class="text-center space-y-8">
+      <h1 class="text-4xl lg:text-6xl font-bold text-gradient">
+        About Thockverse
+      </h1>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Your trusted companion in exploring the universe of mechanical keyboard switches, 
+        one <em class="text-primary font-semibold">thock</em> at a time.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="space-y-6">
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-4">Our Mission</h2>
+          <p class="text-muted-foreground leading-relaxed">
+            We believe every keystroke matters. Thockverse exists to help enthusiasts and professionals 
+            find their perfect mechanical keyboard switch through detailed, unbiased reviews and comprehensive guides.
+          </p>
+        </div>
+
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-4">What We Do</h2>
+          <ul class="space-y-3 text-muted-foreground">
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span>In-depth switch reviews with detailed specifications</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span>Comprehensive keyboard build guides and tutorials</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span>Industry news and emerging technology analysis</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span>Community-driven content and recommendations</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-4">Our Approach</h2>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Every review is conducted with scientific rigor and real-world testing. We evaluate switches across 
+            multiple criteria including tactility, sound signature, durability, and overall typing experience.
+          </p>
+          <div class="grid grid-cols-2 gap-4 text-center">
+            <div class="p-4 bg-primary/10 rounded-xl">
+              <div class="text-2xl font-bold text-primary">120+</div>
+              <div class="text-xs text-muted-foreground">Switches Tested</div>
+            </div>
+            <div class="p-4 bg-accent/10 rounded-xl">
+              <div class="text-2xl font-bold text-accent">50+</div>
+              <div class="text-xs text-muted-foreground">Guides Published</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-4">Contact Us</h2>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Have a switch you'd like us to review? Found an error in our content? 
+            We'd love to hear from the community.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="mailto:hello@thockverse.com" class="btn-glow text-center">
+              Get in Touch
+            </a>
+            <a href="/contact" class="px-6 py-3 border border-border rounded-xl text-sm font-medium hover:border-primary/50 transition-colors text-center">
+              Contact Form
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

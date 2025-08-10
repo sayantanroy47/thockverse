@@ -2,7 +2,7 @@
 title: "Gateron Black Ink V2 Review: The Smooth Premium Linear"
 description: "Premium smoothness in Gateron's flagship INK housing. Exceptionally smooth with a unique sound signature that justifies the premium price."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Gateron", "premium", "smooth", "ink", "enthusiast"]
 specs:

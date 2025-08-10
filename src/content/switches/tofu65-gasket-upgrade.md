@@ -2,7 +2,7 @@
 title: "The Tofu65 just got a major upgrade with gasket mount"
 description: "KBDfans transforms their most popular case with a gasket mount system that completely changes the typing experience."
 author: "Build Guide Pro"
-date: "2025-08-06"
+date: "2024-11-15"
 category: "builds"
 tags: ["tofu65", "gasket mount", "upgrade", "kbdfans", "build guide"]
 ---

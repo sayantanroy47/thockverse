@@ -2,7 +2,7 @@
 title: "Gateron Oil King switches are finally back in stock after 8 months"
 description: "The beloved Gateron Oil King switches return with the same legendary smoothness and deep thock sound that made them a community favorite."
 author: "Switch Master"
-date: "2025-08-06"
+date: "2024-11-15"
 category: "switches"
 tags: ["gateron", "oil king", "linear", "restock", "premium"]
 specs:

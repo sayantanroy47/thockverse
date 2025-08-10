@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+/* Space-themed font imports */
 
 @tailwind base;
 @tailwind components; 
@@ -16,12 +15,94 @@
   }
   
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-image: 
-      linear-gradient(135deg, rgba(4, 4, 7, 1) 0%, rgba(10, 10, 14, 1) 50%, rgba(4, 4, 7, 1) 100%);
-    background-attachment: fixed;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #000000;
+    background-image: none;
     min-height: 100vh;
     position: relative;
+  }
+
+  /* Professional Typography Hierarchy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: rgb(250, 250, 250);
+  }
+
+  /* Responsive heading scales */
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1.0;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 1.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.375rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  h5 {
+    font-size: clamp(1.125rem, 2vw, 1.25rem);
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.4;
+  }
+
+  h6 {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+
+  /* Professional body text */
+  p {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+    color: rgb(250, 250, 250);
+  }
+
+  /* Text sizes */
+  .text-sm {
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+  }
+
+  .text-xs {
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+
+  /* Technical text (for code, specs, etc.) */
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
   }
 
   /* Ultra clean space - NO particles or boxes */
@@ -50,33 +131,35 @@
     z-index: -1;
   }
 
-  /* MAXIMUM SATURATION deep space theme with HYPER-NEON accents */
+  /* Sophisticated Professional Color System - Google Material Design Inspired */
   :root {
-    --background: 0 0 2; /* MAXIMUM void black */
-    --foreground: 255 255 255; /* Pure bright white */
-    --card: 3 5 8; /* ULTRA dark nebula */
-    --card-foreground: 255 255 255;
-    --popover: 3 5 8;
-    --popover-foreground: 255 255 255;
-    --primary: 0 217 217; /* MAXIMUM electric cyan - darker/saturated */
-    --primary-foreground: 0 0 2;
-    --secondary: 0 217 43; /* MAXIMUM neon green - darker/saturated */
-    --secondary-foreground: 0 0 2;
-    --muted: 8 12 18;
-    --muted-foreground: 180 200 220;
-    --accent: 217 0 102; /* MAXIMUM hot pink neon - darker/saturated */
-    --accent-foreground: 0 0 2;
-    --destructive: 255 20 20;
+    --background: 0 0 0; /* Pure black foundation */
+    --foreground: 248 250 252; /* Clean off-white with subtle blue tint */
+    --card: 15 23 32; /* Rich dark blue-gray cards */
+    --card-foreground: 241 245 249;
+    --popover: 17 24 39;
+    --popover-foreground: 248 250 252;
+    --primary: 59 130 246; /* Professional blue - trust & reliability */
+    --primary-foreground: 255 255 255;
+    --secondary: 71 85 105; /* Sophisticated slate */
+    --secondary-foreground: 248 250 252;
+    --muted: 20 25 31; /* Refined dark background */
+    --muted-foreground: 148 163 184; /* Professional muted text */
+    --accent: 139 92 246; /* Premium violet - creativity & innovation */
+    --accent-foreground: 255 255 255;
+    --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
-    --border: 8 12 18;
-    --input: 5 8 12;
-    --ring: 0 217 217;
-    --neon-cyan: 0 217 217;
-    --neon-pink: 217 0 102;
-    --neon-green: 0 217 43;
-    --neon-purple: 128 0 217;
-    --stellar-orange: 217 102 0;
-    --deep-void: 0 0 1;
+    --border: 30 41 59; /* Subtle professional borders */
+    --input: 15 23 42;
+    --ring: 59 130 246;
+    /* Professional accent colors */
+    --success: 16 185 129; /* Success green */
+    --warning: 245 158 11; /* Warning amber */
+    --info: 6 182 212; /* Info cyan */
+    --surface: 15 23 32; /* Surface level */
+    --surface-variant: 25 32 41; /* Surface variant */
+    --outline: 51 65 85; /* Outline color */
+    --shadow: 0 0 0; /* Pure black shadows */
   }
   
   .light {
@@ -120,7 +203,7 @@
       radial-gradient(2px 2px at 280px 60px, rgba(85, 127, 201, 0.7), transparent);
     background-repeat: repeat;
     background-size: 200px 150px, 300px 200px, 250px 180px, 180px 120px, 220px 160px, 280px 190px, 320px 220px, 260px 170px;
-    animation: starfield-gentle 12s ease-in-out infinite, cosmic-parallax 25s linear infinite;
+    animation: none;
     pointer-events: none;
     z-index: -1;
   }
@@ -141,26 +224,44 @@
 
 /* Component styles */
 @layer components {
-  /* Glass morphism effect */
+  /* Premium Glass Morphism Effects */
   .glass {
-    @apply backdrop-blur-xl bg-card/80 border border-border;
+    @apply backdrop-blur-2xl border;
+    background: linear-gradient(135deg, rgb(15 23 32 / 0.9), rgb(30 41 59 / 0.7));
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: 
+      0 8px 32px rgb(0 0 0 / 0.12),
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      inset 0 -1px 0 rgb(0 0 0 / 0.05);
   }
 
   .glass-dark {
-    @apply backdrop-blur-xl bg-card/60 border border-border;
+    @apply backdrop-blur-3xl border;
+    background: linear-gradient(135deg, rgb(0 0 0 / 0.8), rgb(15 23 32 / 0.6));
+    border: 1px solid rgb(255 255 255 / 0.06);
+    box-shadow: 
+      0 16px 64px rgb(0 0 0 / 0.15),
+      inset 0 1px 0 rgb(255 255 255 / 0.06),
+      inset 0 -1px 0 rgb(0 0 0 / 0.08);
   }
 
-  /* Elegant space buttons */
+  /* Professional Premium Buttons */
   .btn-glow {
-    @apply relative overflow-hidden rounded-lg px-6 py-3 font-medium transition-all duration-300;
-    @apply bg-primary text-background;
-    @apply hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20;
-    border: 1px solid rgba(100, 149, 237, 0.2);
+    @apply relative overflow-hidden rounded-xl px-6 py-3 font-semibold text-sm transition-all duration-300;
+    @apply bg-gradient-to-r from-primary to-primary/90 text-white;
+    @apply hover:shadow-2xl hover:shadow-primary/25 hover:-translate-y-0.5;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+    border: 1px solid rgb(59 130 246 / 0.3);
   }
 
   .btn-glow:hover {
-    border: 1px solid rgba(100, 149, 237, 0.4);
-    box-shadow: 0 0 15px rgba(100, 149, 237, 0.15);
+    background: linear-gradient(135deg, rgb(59 130 246), rgb(79 70 229));
+    border-color: rgb(59 130 246 / 0.6);
+    transform: translateY(-1px);
+    box-shadow: 
+      0 20px 25px -5px rgb(59 130 246 / 0.1),
+      0 8px 10px -6px rgb(59 130 246 / 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 0.1);
   }
 
   .btn-glow::before {
@@ -170,19 +271,32 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .btn-glow:hover::before {
     left: 100%;
   }
 
-  /* Switch card styles */
+  /* Premium Card Styles */
   .switch-card {
-    @apply bg-card rounded-xl border border-border p-6;
-    @apply hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10;
-    @apply transition-all duration-300 hover:-translate-y-1;
+    @apply relative bg-card/80 backdrop-blur-xl rounded-2xl border border-border/50 p-6;
+    @apply transition-all duration-500 hover:-translate-y-2 hover:scale-[1.02];
+    @apply hover:border-primary/40 hover:shadow-2xl hover:shadow-primary/10;
+    background: linear-gradient(145deg, rgb(15 23 32 / 0.9), rgb(25 32 41 / 0.7));
+    box-shadow: 
+      0 4px 6px -1px rgb(0 0 0 / 0.1),
+      0 2px 4px -2px rgb(0 0 0 / 0.1),
+      inset 0 1px 0 rgb(255 255 255 / 0.05);
+  }
+
+  .switch-card:hover {
+    background: linear-gradient(145deg, rgb(15 23 32), rgb(30 41 59 / 0.9));
+    box-shadow: 
+      0 25px 50px -12px rgb(59 130 246 / 0.15),
+      0 0 0 1px rgb(59 130 246 / 0.05),
+      inset 0 1px 0 rgb(255 255 255 / 0.1);
   }
 
   /* Subtle stellar glow effects */
@@ -237,9 +351,14 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
-  /* Elegant orbital animation */
+  /* Elegant orbital animation - trigger-based only */
   .orbital {
-    animation: orbit 20s linear infinite;
+    animation: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .orbital:hover {
+    animation: orbit 8s linear infinite;
   }
 
   /* Subtle parallax elements */
@@ -282,6 +401,10 @@
 
   .typing-dot {
     @apply w-2 h-2 bg-primary-500 rounded-full;
+    animation: none;
+  }
+  
+  .typing-indicator.active .typing-dot {
     animation: typing 1.4s ease-in-out infinite;
   }
 
@@ -296,6 +419,11 @@
   /* Waveform visualizer */
   .waveform-bar {
     @apply bg-gradient-to-t from-primary-600 to-primary-400 rounded-t-sm;
+    animation: none;
+    transition: height 0.2s ease;
+  }
+  
+  .waveform.active .waveform-bar {
     animation: wave 1s ease-in-out infinite;
   }
 
@@ -316,25 +444,42 @@
     @apply text-muted-foreground;
   }
 
-  /* Navigation styles */
+  /* Sophisticated Navigation Styles */
   .nav-link {
-    @apply relative px-4 py-2 rounded-lg transition-all duration-200 text-muted-foreground;
-    @apply hover:bg-muted hover:text-primary;
+    @apply relative px-4 py-2 rounded-xl transition-all duration-300 text-muted-foreground font-medium;
+    @apply hover:text-foreground;
+    @apply hover:-translate-y-0.5 hover:shadow-lg;
+    background: linear-gradient(135deg, transparent, transparent);
+    border: 1px solid transparent;
+  }
+
+  .nav-link:hover {
+    background: linear-gradient(135deg, rgb(59 130 246 / 0.08), rgb(139 92 246 / 0.06));
+    border-color: rgb(59 130 246 / 0.1);
+    box-shadow: 
+      0 4px 12px rgb(59 130 246 / 0.08),
+      inset 0 1px 0 rgb(255 255 255 / 0.05);
   }
 
   .nav-link.active {
-    @apply text-primary bg-primary/10;
+    @apply text-primary;
+    background: linear-gradient(135deg, rgb(59 130 246 / 0.15), rgb(139 92 246 / 0.10));
+    border-color: rgb(59 130 246 / 0.2);
+    box-shadow: 
+      0 2px 8px rgb(59 130 246 / 0.12),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
   }
 
   .nav-link::after {
     content: '';
-    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-200;
-    @apply transform -translate-x-1/2;
+    @apply absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all duration-300;
+    @apply transform -translate-x-1/2 rounded-full;
+    background: linear-gradient(90deg, rgb(59 130 246), rgb(139 92 246));
   }
 
   .nav-link:hover::after,
   .nav-link.active::after {
-    @apply w-full;
+    @apply w-3/4;
   }
 }
 
@@ -361,45 +506,37 @@
     display: none !important;
   }
 
-  /* Force hide all scrollbars COMPLETELY */
-  .force-no-scroll {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-    overflow: hidden !important;
+  /* Clean scrollbar styling */
+  .clean-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   }
 
-  .force-no-scroll::-webkit-scrollbar {
-    display: none !important;
-    width: 0px !important;
-    height: 0px !important;
-    background: transparent !important;
+  .clean-scroll::-webkit-scrollbar {
+    width: 4px;
   }
 
-  .force-no-scroll *::-webkit-scrollbar {
-    display: none !important;
-    width: 0px !important;
-    height: 0px !important;
+  .clean-scroll::-webkit-scrollbar-track {
+    background: transparent;
   }
 
-  /* Kill ALL scrollbars universally */
-  #sidebar,
-  #sidebar *,
-  .sidebar *,
-  aside,
-  aside * {
-    scrollbar-width: none !important;
-    -ms-overflow-style: none !important;
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
+  .clean-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
   }
 
-  #sidebar::-webkit-scrollbar,
-  #sidebar *::-webkit-scrollbar,
-  aside::-webkit-scrollbar,
-  aside *::-webkit-scrollbar {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
+  /* Clean scrollbar handling for sidebar */
+  #sidebar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  #sidebar::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
 
   /* Neon scrollbar for special cases */

@@ -2,8 +2,9 @@
 title: "Gateron Yellow Review: The Budget Linear Champion"
 description: "The best budget linear switch on the market. Incredibly smooth for the price with a deep, satisfying sound that punches well above its weight class."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.3
 tags: ["linear", "Gateron", "budget", "smooth", "thocky", "value"]
 specs:
   actuationforce: "50g"

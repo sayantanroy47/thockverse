@@ -2,8 +2,9 @@
 title: "Tealios V2 Review: Ultra-Premium Linear Smoothness"
 description: "The smoothest stock linear switch money can buy. UHMWPE stems create unparalleled smoothness that defines premium."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 9.0
 tags: ["linear", "ZealPC", "premium", "smooth", "tealios", "endgame"]
 specs:
   actuationforce: "67g"

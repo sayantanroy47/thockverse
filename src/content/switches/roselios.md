@@ -2,7 +2,7 @@
 title: "Rosélios Review: The Light Silent Premium"
 description: "Lighter silent linears with rose aesthetic. Perfect for quiet typing without fatigue."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "ZealPC", "silent", "light", "premium", "rose"]
 specs:

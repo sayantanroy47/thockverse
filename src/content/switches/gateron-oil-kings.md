@@ -2,8 +2,9 @@
 title: "Gateron Oil Kings Review: The Deep Thock Experience"
 description: "Deep-sounding linear switch with a premium feel. Great for thock lovers seeking that satisfying bottom-out sound without the tactile bump."
 author: "Thock Guru"
-date: "2025-08-06"
+date: "2024-11-15"
 category: "switches"
+rating: 8.8
 tags: ["linear", "Gateron", "sound test", "premium", "thocky", "smooth"]
 specs:
   actuationforce: "45g"

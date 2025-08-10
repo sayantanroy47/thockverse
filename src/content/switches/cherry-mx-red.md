@@ -2,8 +2,9 @@
 title: "Cherry MX Red Review: The Gaming Linear Legend"
 description: "The quintessential gaming linear switch. Light, consistent, and widely available with excellent compatibility across all keyboards."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.1
 tags: ["linear", "Cherry MX", "gaming", "smooth", "light", "classic"]
 specs:
   actuationforce: "45g"

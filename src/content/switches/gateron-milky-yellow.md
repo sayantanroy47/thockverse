@@ -2,7 +2,7 @@
 title: "Gateron Milky Yellow Review: The Thock Master"
 description: "The ultimate budget thock switch. Milky housing creates deeper, more satisfying sound than standard Yellows while maintaining exceptional value."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Gateron", "milky", "thocky", "budget", "smooth"]
 specs:

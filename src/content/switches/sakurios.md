@@ -2,7 +2,7 @@
 title: "Sakurios Review: The Silent Linear Dream"
 description: "Premium silent linears from ZealPC. Library-quiet operation with exceptional smoothness."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "ZealPC", "silent", "smooth", "premium", "quiet"]
 specs:

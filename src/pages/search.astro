@@ -2,48 +2,79 @@
 // Search results page
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { getCollection } from 'astro:content';
 
 // Get search query from URL parameters
 const url = new URL(Astro.request.url);
 const searchQuery = url.searchParams.get('q') || '';
 
-// Sample search results - in a real app, this would come from a search engine/database
-const searchResults = searchQuery ? [
-  {
+// Get all content from collections
+const allSwitches = await getCollection('switches', ({ data }) => !data.draft);
+const allTutorials = await getCollection('tutorials', ({ data }) => !data.draft);
+const allNews = await getCollection('news', ({ data }) => !data.draft);
+
+// Combine all content into searchable format
+const allContent = [
+  ...allSwitches.map(entry => ({
     type: 'switch',
-    title: 'Cherry MX Blue Review: The Clicky Typing Icon',
-    slug: 'cherry-mx-blue',
-    excerpt: 'The definitive clicky switch that started it all. Beloved by typists for its audible and tactile feedback...',
+    title: entry.data.title,
+    slug: entry.slug,
+    excerpt: entry.data.description,
     category: 'switches',
-    date: '2025-08-07',
-    rating: 8.5,
-    image: '/images/cherry-mx-blue-card.jpg'
-  },
-  {
-    type: 'switch', 
-    title: 'Gateron Oil Kings: The Deep Thock Experience',
-    slug: 'gateron-oil-kings',
-    excerpt: 'Deep-sounding linear switch with a premium feel. Great for thock lovers seeking that satisfying bottom-out sound...',
-    category: 'switches',
-    date: '2025-08-06',
-    rating: 9.2,
-    image: '/images/gateron-oil-kings-card.jpg'
-  },
-  {
+    date: new Date(entry.data.date).toISOString().split('T')[0],
+    rating: entry.data.rating,
+    image: entry.data.heroImage,
+    tags: entry.data.tags || [],
+    manufacturer: entry.data.manufacturer
+  })),
+  ...allTutorials.map(entry => ({
     type: 'tutorial',
-    title: 'Tofu65 Gasket Upgrade: Transformation Guide', 
-    slug: 'tofu65-gasket-upgrade',
-    excerpt: 'How to transform your Tofu65 into a gasket-mount wonder. Complete step-by-step guide with tips and tricks...',
+    title: entry.data.title,
+    slug: entry.slug,
+    excerpt: entry.data.description,
     category: 'tutorials',
-    date: '2025-08-02',
-    rating: 8.9,
-    image: '/images/tofu65-upgrade-card.jpg'
-  }
-].filter(result => 
-  result.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  result.excerpt.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  result.category.toLowerCase().includes(searchQuery.toLowerCase())
-) : [];
+    date: new Date(entry.data.date).toISOString().split('T')[0],
+    rating: null,
+    image: entry.data.heroImage,
+    tags: entry.data.tags || [],
+    difficulty: entry.data.difficulty
+  })),
+  ...allNews.map(entry => ({
+    type: 'news',
+    title: entry.data.title,
+    slug: entry.slug,
+    excerpt: entry.data.description,
+    category: 'news',
+    date: new Date(entry.data.date).toISOString().split('T')[0],
+    rating: null,
+    image: entry.data.heroImage,
+    tags: entry.data.tags || [],
+    source: entry.data.source
+  }))
+];
+
+// Perform search if query exists
+const searchResults = searchQuery ? allContent.filter(result => {
+  const query = searchQuery.toLowerCase();
+  return (
+    result.title.toLowerCase().includes(query) ||
+    result.excerpt.toLowerCase().includes(query) ||
+    result.category.toLowerCase().includes(query) ||
+    result.tags.some(tag => tag.toLowerCase().includes(query)) ||
+    (result.manufacturer && result.manufacturer.toLowerCase().includes(query))
+  );
+}).sort((a, b) => {
+  // Sort by relevance: exact title matches first, then by date
+  const aTitle = a.title.toLowerCase();
+  const bTitle = b.title.toLowerCase();
+  const query = searchQuery.toLowerCase();
+  
+  if (aTitle.includes(query) && !bTitle.includes(query)) return -1;
+  if (!aTitle.includes(query) && bTitle.includes(query)) return 1;
+  
+  // Sort by date (newest first)
+  return new Date(b.date).getTime() - new Date(a.date).getTime();
+}) : [];
 
 const breadcrumbs = [
   { name: 'Search', href: '/search' },
@@ -179,7 +210,7 @@ const breadcrumbs = [
 
                     <!-- Title -->
                     <h2 class="text-xl lg:text-2xl font-bold text-foreground group-hover:text-primary-400 transition-colors duration-200">
-                      <a href={`/posts/${result.slug}`} class="hover:underline">
+                      <a href={`/${result.category}/${result.slug}`} class="hover:underline">
                         {result.title}
                       </a>
                     </h2>
@@ -192,10 +223,10 @@ const breadcrumbs = [
                     <!-- Read more link -->
                     <div class="pt-2">
                       <a 
-                        href={`/posts/${result.slug}`}
+                        href={`/${result.category}/${result.slug}`}
                         class="inline-flex items-center space-x-2 text-primary-400 hover:text-primary-300 font-medium transition-colors duration-200"
                       >
-                        <span>Read {result.type === 'switch' ? 'Review' : 'Article'}</span>
+                        <span>Read {result.type === 'switch' ? 'Review' : result.type === 'tutorial' ? 'Guide' : 'Article'}</span>
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                         </svg>

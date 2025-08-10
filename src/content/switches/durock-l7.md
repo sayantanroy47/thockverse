@@ -2,8 +2,9 @@
 title: "Durock L7 Review: The Smoky Linear Excellence"
 description: "JWK-manufactured linears with distinctive smoky housing. Excellent smoothness and deep sound."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.6
 tags: ["linear", "Durock", "JWK", "smoky", "smooth", "premium"]
 specs:
   actuationforce: "62g"

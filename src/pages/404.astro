@@ -166,14 +166,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </script>
 
 <style>
-  /* Enhanced orbital animation */
+  /* Enhanced orbital animation - hover triggered */
   .orbital {
-    animation: orbit 15s linear infinite;
+    animation: none;
+    transition: transform 0.3s ease;
   }
   
-  /* Floating animation for 404 text */
+  .orbital:hover {
+    animation: orbit 8s linear infinite;
+  }
+  
+  /* Floating animation for 404 text - hover triggered */
   .text-8xl,
   .text-9xl {
+    animation: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .text-8xl:hover,
+  .text-9xl:hover {
     animation: float 4s ease-in-out infinite;
   }
   
@@ -193,7 +204,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     background: radial-gradient(circle, rgba(58, 155, 220, 0.2) 0%, transparent 70%);
     border-radius: inherit;
     transform: translate(-50%, -50%);
-    animation: pulse-expand 1s ease-out infinite;
+    animation: pulse-expand 1s ease-out 3;
     z-index: -1;
   }
   

@@ -1,0 +1,223 @@
+---
+// Privacy Policy page
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Privacy Policy | Thockverse" description="Privacy policy and data handling practices for Thockverse." showSidebar={false}>
+  <div class="max-w-4xl mx-auto space-y-12">
+    <div class="text-center space-y-6">
+      <h1 class="text-4xl lg:text-5xl font-bold text-gradient">
+        Privacy Policy
+      </h1>
+      <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+        Last updated: January 10, 2025
+      </p>
+    </div>
+
+    <div class="space-y-8">
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Our Commitment to Privacy</h2>
+        <p class="text-muted-foreground leading-relaxed">
+          At Thockverse, we take your privacy seriously. This policy outlines how we collect, 
+          use, and protect your information when you use our website and services. We believe 
+          in transparency and your right to control your personal data.
+        </p>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Information We Collect</h2>
+        
+        <h3 class="text-lg font-semibold text-foreground mb-3">Information You Provide</h3>
+        <ul class="space-y-2 text-muted-foreground mb-6">
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>Contact information when you reach out to us (name, email)</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+            <span>Newsletter subscription data (email address only)</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>Comments and feedback you submit</span>
+          </li>
+        </ul>
+
+        <h3 class="text-lg font-semibold text-foreground mb-3">Automatically Collected Information</h3>
+        <ul class="space-y-2 text-muted-foreground">
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>Basic website analytics (page views, session duration, browser type)</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+            <span>IP address and general location data</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>Search queries and site navigation patterns</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">How We Use Your Information</h2>
+        <ul class="space-y-3 text-muted-foreground">
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>To respond to your inquiries and provide customer support</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+            <span>To send newsletters and updates (only if you've subscribed)</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+            <span>To improve our website content and user experience</span>
+          </li>
+          <li class="flex items-start space-x-3">
+            <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+            <span>To understand which content is most valuable to our audience</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Data Sharing and Third Parties</h2>
+        <div class="space-y-4 text-muted-foreground">
+          <p>
+            <strong class="text-foreground">We do not sell your personal information.</strong> 
+            We may share limited data with trusted service providers who help us operate our website:
+          </p>
+          
+          <ul class="space-y-2">
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span><strong class="text-foreground">Analytics:</strong> Google Analytics (anonymized data only)</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span><strong class="text-foreground">Hosting:</strong> Our hosting provider for website functionality</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span><strong class="text-foreground">Email:</strong> Newsletter service provider (for subscribers only)</span>
+            </li>
+          </ul>
+          
+          <p>
+            All third-party services are carefully vetted and required to maintain the same privacy standards we follow.
+          </p>
+        </div>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Your Rights and Choices</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-lg font-semibold text-foreground mb-3">You Have the Right To:</h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                <span>Access your personal data</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-accent rounded-full"></div>
+                <span>Correct inaccurate information</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                <span>Request data deletion</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-accent rounded-full"></div>
+                <span>Unsubscribe from newsletters</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold text-foreground mb-3">Browser Settings:</h3>
+            <ul class="space-y-2 text-muted-foreground">
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                <span>Disable cookies</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-accent rounded-full"></div>
+                <span>Block tracking scripts</span>
+              </li>
+              <li class="flex items-center space-x-2">
+                <div class="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                <span>Use private browsing</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Data Security</h2>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          We implement industry-standard security measures to protect your information:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="p-4 bg-primary/10 rounded-lg">
+            <div class="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h4 class="font-medium text-foreground mb-1">HTTPS Encryption</h4>
+            <p class="text-xs text-muted-foreground">All data transmitted is encrypted</p>
+          </div>
+          
+          <div class="p-4 bg-accent/10 rounded-lg">
+            <div class="w-8 h-8 bg-accent/20 rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+              </svg>
+            </div>
+            <h4 class="font-medium text-foreground mb-1">Data Minimization</h4>
+            <p class="text-xs text-muted-foreground">We only collect necessary data</p>
+          </div>
+          
+          <div class="p-4 bg-green-500/10 rounded-lg">
+            <div class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center mb-2">
+              <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+            <h4 class="font-medium text-foreground mb-1">Regular Audits</h4>
+            <p class="text-xs text-muted-foreground">Security practices reviewed quarterly</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="switch-card">
+        <h2 class="text-2xl font-bold text-foreground mb-4">Contact Us About Privacy</h2>
+        <p class="text-muted-foreground leading-relaxed mb-4">
+          If you have any questions about this privacy policy or wish to exercise your rights, 
+          please contact us:
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="mailto:privacy@thockverse.com" class="btn-glow text-center">
+            Email Privacy Team
+          </a>
+          <a href="/contact" class="px-6 py-3 border border-border rounded-xl text-sm font-medium hover:border-primary/50 transition-colors text-center">
+            Contact Form
+          </a>
+        </div>
+      </div>
+
+      <div class="switch-card bg-muted/20">
+        <p class="text-sm text-muted-foreground">
+          This privacy policy may be updated from time to time. We will notify users of significant 
+          changes via email (for subscribers) or by posting a notice on our website. Your continued 
+          use of our website constitutes acceptance of any changes to this policy.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,178 @@
+---
+// Contact page
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact Thockverse | Get in Touch" description="Contact the Thockverse team for switch reviews, collaborations, or feedback." showSidebar={false}>
+  <div class="max-w-4xl mx-auto space-y-16">
+    <div class="text-center space-y-8">
+      <h1 class="text-4xl lg:text-6xl font-bold text-gradient">
+        Get in Touch
+      </h1>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Have a switch you'd like us to review? Found an error? Want to collaborate? 
+        We'd love to hear from the community.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div class="space-y-8">
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Contact Methods</h2>
+          
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-primary/20 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-1">Email</h3>
+                <p class="text-muted-foreground mb-2">For general inquiries and switch reviews</p>
+                <a href="mailto:hello@thockverse.com" class="text-primary hover:text-accent transition-colors font-medium">
+                  hello@thockverse.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-accent/20 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-1">Community</h3>
+                <p class="text-muted-foreground mb-2">Join our discussions and feedback</p>
+                <a href="mailto:community@thockverse.com" class="text-primary hover:text-accent transition-colors font-medium">
+                  community@thockverse.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-semibold text-foreground mb-1">Press & Business</h3>
+                <p class="text-muted-foreground mb-2">Media inquiries and partnerships</p>
+                <a href="mailto:press@thockverse.com" class="text-primary hover:text-accent transition-colors font-medium">
+                  press@thockverse.com
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-4">Response Times</h2>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-muted-foreground">General Inquiries</span>
+              <span class="text-sm px-2 py-1 bg-green-500/20 text-green-500 rounded-full">1-2 days</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-muted-foreground">Review Requests</span>
+              <span class="text-sm px-2 py-1 bg-yellow-500/20 text-yellow-500 rounded-full">3-5 days</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-muted-foreground">Press Inquiries</span>
+              <span class="text-sm px-2 py-1 bg-green-500/20 text-green-500 rounded-full">24 hours</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="switch-card">
+          <h2 class="text-2xl font-bold text-foreground mb-6">Send a Message</h2>
+          
+          <form class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-foreground mb-2">Name</label>
+                <input 
+                  type="text" 
+                  id="name"
+                  name="name"
+                  class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder-muted-foreground focus-space"
+                  placeholder="Your name"
+                  required
+                >
+              </div>
+              <div>
+                <label for="email" class="block text-sm font-medium text-foreground mb-2">Email</label>
+                <input 
+                  type="email" 
+                  id="email"
+                  name="email"
+                  class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder-muted-foreground focus-space"
+                  placeholder="your@email.com"
+                  required
+                >
+              </div>
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-sm font-medium text-foreground mb-2">Subject</label>
+              <select 
+                id="subject"
+                name="subject"
+                class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus-space"
+                required
+              >
+                <option value="">Select a topic</option>
+                <option value="review">Switch Review Request</option>
+                <option value="feedback">Website Feedback</option>
+                <option value="collaboration">Collaboration</option>
+                <option value="press">Press Inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-foreground mb-2">Message</label>
+              <textarea 
+                id="message"
+                name="message"
+                rows="6"
+                class="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder-muted-foreground focus-space resize-none"
+                placeholder="Tell us about your inquiry..."
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="w-full btn-glow">Send Message</button>
+          </form>
+        </div>
+
+        <div class="switch-card bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
+          <h3 class="text-lg font-bold text-foreground mb-4">Review Guidelines</h3>
+          <ul class="space-y-2 text-sm text-muted-foreground">
+            <li class="flex items-start space-x-2">
+              <div class="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span>We review switches from all manufacturers</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <div class="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span>Sample quantity: minimum 10 switches for testing</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <div class="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span>Reviews are published within 2-4 weeks</span>
+            </li>
+            <li class="flex items-start space-x-2">
+              <div class="w-1.5 h-1.5 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span>All reviews remain independent and unbiased</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

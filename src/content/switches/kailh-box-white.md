@@ -2,8 +2,9 @@
 title: "Kailh Box White Review: The Modern Clicky Revolution"
 description: "Revolutionary click-bar design creates crisp, consistent clicks. The Box design offers superior protection against dust and moisture."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 7.8
 tags: ["clicky", "Kailh", "box", "tactile", "click-bar", "innovative"]
 specs:
   actuationforce: "45g"

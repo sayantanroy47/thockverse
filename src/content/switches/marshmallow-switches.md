@@ -2,7 +2,7 @@
 title: "Marshmallow Switches Review: Pillowy Soft Linear Heaven"
 description: "Ultra-light linear switches with a unique pillowy feel that's perfect for gaming and fast typing, though they may be too light for some users."
 author: "Thock Guru"
-date: "2025-08-04"
+date: "2024-09-25"
 category: "switches"
 tags: ["linear", "soft", "pillowy", "unique", "campfire switches", "novelty"]
 specs:

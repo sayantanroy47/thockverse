@@ -2,7 +2,7 @@
 title: "NovelKeys Silk Yellow Review: The Smooth Budget Option"
 description: "JWK-manufactured budget switches with excellent factory lubing. Great smoothness at accessible prices."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "NovelKeys", "Silk", "budget", "smooth", "yellow"]
 specs:

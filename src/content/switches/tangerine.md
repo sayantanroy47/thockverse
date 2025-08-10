@@ -2,8 +2,9 @@
 title: "C³Equalz Tangerine Review: The UHMWPE Smooth Criminal"
 description: "UHMWPE housing creates incredible smoothness. Bright sound signature with exceptional performance."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 9.1
 tags: ["linear", "Tangerine", "UHMWPE", "smooth", "C3Equalz", "premium"]
 specs:
   actuationforce: "62g"

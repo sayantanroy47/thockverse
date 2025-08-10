@@ -2,7 +2,7 @@
 title: "Kailh Cream Review: The Heavy Linear Alternative"
 description: "All-POM construction similar to NK Creams but with Kailh's interpretation. Unique feel and sound."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["linear", "Kailh", "heavy", "smooth", "cream", "unique"]
 specs:

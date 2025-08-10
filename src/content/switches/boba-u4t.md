@@ -2,8 +2,9 @@
 title: "Boba U4T Review: The Thocky Tactile King"
 description: "Maximum thock in a tactile switch. Strong D-shaped bump with incredibly deep sound that rivals Holy Pandas."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.9
 tags: ["tactile", "Boba", "Gazzew", "thocky", "silent", "enthusiast"]
 specs:
   actuationforce: "62g"

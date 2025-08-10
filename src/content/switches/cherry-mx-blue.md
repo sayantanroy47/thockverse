@@ -2,8 +2,9 @@
 title: "Cherry MX Blue Review: The Clicky Typing Icon"
 description: "The definitive clicky switch that started it all. Beloved by typists for its audible and tactile feedback, though definitely not for quiet environments."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
+rating: 8.5
 tags: ["clicky", "Cherry MX", "tactile", "loud", "typing", "classic"]
 specs:
   actuationforce: "50g"

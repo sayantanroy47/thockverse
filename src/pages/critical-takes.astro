@@ -1,0 +1,106 @@
+---
+// Critical Takes page - editorial content and hot takes
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Critical Takes | Thockverse" description="Unfiltered opinions and critical analysis of the mechanical keyboard industry, trends, and culture." showSidebar={false}>
+  <div class="max-w-4xl mx-auto space-y-16">
+    <div class="text-center space-y-8">
+      <h1 class="text-4xl lg:text-6xl font-bold text-gradient">
+        Critical Takes
+      </h1>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        Unfiltered opinions and critical analysis of the mechanical keyboard industry, 
+        trends, and culture. Where we say what everyone else is thinking.
+      </p>
+    </div>
+
+    <div class="space-y-12">
+      <!-- Featured Critical Take -->
+      <div class="switch-card">
+        <div class="flex items-start space-x-6">
+          <div class="flex-shrink-0">
+            <div class="w-16 h-16 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center">
+              <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+              </svg>
+            </div>
+          </div>
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold text-foreground mb-4">Coming Soon: Hot Takes on the Hobby</h2>
+            <p class="text-muted-foreground leading-relaxed mb-4">
+              We're preparing in-depth editorial content that tackles the controversial topics 
+              in the mechanical keyboard community. From overpriced "premium" switches to 
+              keyboard elitism, we'll cover it all with data-driven analysis and honest opinions.
+            </p>
+            <div class="flex items-center space-x-4">
+              <span class="text-sm text-accent font-medium">Editorial</span>
+              <span class="text-sm text-muted-foreground">•</span>
+              <span class="text-sm text-muted-foreground">Coming January 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upcoming Topics -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="switch-card">
+          <h3 class="text-xl font-bold text-foreground mb-4">🔥 Upcoming Hot Takes</h3>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span class="text-muted-foreground">Why $2+ switches aren't always better</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span class="text-muted-foreground">The myth of "premium" keyboard materials</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+              <span class="text-muted-foreground">Group buy culture needs to change</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <div class="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+              <span class="text-muted-foreground">Sound tests are ruining switch reviews</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="switch-card">
+          <h3 class="text-xl font-bold text-foreground mb-4">📊 Data-Driven Analysis</h3>
+          <p class="text-muted-foreground leading-relaxed mb-4">
+            Every critical take will be backed by real data, community surveys, 
+            and extensive testing. We believe in opinions backed by evidence.
+          </p>
+          <div class="flex items-center space-x-3">
+            <div class="px-3 py-1 bg-primary/20 rounded-full">
+              <span class="text-xs font-medium text-primary">Research-Based</span>
+            </div>
+            <div class="px-3 py-1 bg-accent/20 rounded-full">
+              <span class="text-xs font-medium text-accent">Unbiased</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="switch-card bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
+        <div class="text-center space-y-6">
+          <h3 class="text-2xl font-bold text-foreground">Get Notified</h3>
+          <p class="text-muted-foreground">
+            Be the first to read our critical takes when they launch. 
+            We promise: no spam, just honest keyboard content.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <input 
+              type="email" 
+              placeholder="your@email.com"
+              class="flex-1 px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder-muted-foreground focus-space"
+            >
+            <button class="btn-glow">Notify Me</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

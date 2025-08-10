@@ -2,7 +2,7 @@
 title: "Kailh Box Navy Review: The Ultra-Heavy Click Monster"
 description: "The heaviest, loudest Box switch. Not for the faint of heart - these demand strong fingers and understanding neighbors."
 author: "Switch Expert"
-date: "2025-08-07"
+date: "2024-12-15"
 category: "switches"
 tags: ["clicky", "Kailh", "Box", "ultra-heavy", "loud", "extreme"]
 specs:
