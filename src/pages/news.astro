@@ -1,0 +1,287 @@
+---
+// News collection page - Browse all industry news and analysis
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all news articles
+const news = (await getCollection('news'))
+  .filter(article => !article.data.draft)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const featuredNews = news.filter(article => article.data.featured);
+const recentNews = news.filter(article => !article.data.featured);
+
+// Group news by category for better organization
+const categories = [...new Set(news.map(article => article.data.category))];
+---
+
+<BaseLayout 
+  title="Keyboard Industry News & Analysis | Thockverse"
+  description="Latest mechanical keyboard industry news, market analysis, and technical insights. Stay informed about trends, innovations, and developments."
+>
+  <div class="max-w-7xl mx-auto space-y-12">
+    
+    <!-- Page Header -->
+    <div class="text-center space-y-6 py-12">
+      <div class="space-y-4">
+        <h1 class="text-4xl lg:text-6xl font-bold text-gradient leading-tight">
+          Industry News & Analysis
+        </h1>
+        <p class="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+          Stay informed about the mechanical keyboard industry with our expert analysis and breaking news coverage.
+        </p>
+      </div>
+      
+      <!-- Stats -->
+      <div class="flex justify-center items-center space-x-8 text-sm text-muted-foreground">
+        <div class="flex items-center space-x-2">
+          <div class="w-2 h-2 bg-accent-500 rounded-full"></div>
+          <span>{news.length} Articles</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+          <span>{categories.length} Categories</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured News -->
+    {featuredNews.length > 0 && (
+      <section class="space-y-6">
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
+          <h2 class="text-3xl font-bold text-gradient">Breaking News</h2>
+        </div>
+        
+        <!-- Lead Story -->
+        {featuredNews[0] && (
+          <article class="glass-dark rounded-2xl overflow-hidden hover:scale-[1.01] transition-all duration-500 group">
+            <div class="lg:flex">
+              <!-- Featured Image -->
+              <div class="lg:w-1/2 relative">
+                <div class="aspect-video lg:aspect-[4/3] bg-gradient-to-br from-accent-500/20 to-primary-500/20 flex items-center justify-center overflow-hidden">
+                  {featuredNews[0].data.heroImage ? (
+                    <img 
+                      src={featuredNews[0].data.heroImage}
+                      alt={featuredNews[0].data.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="eager"
+                    />
+                  ) : (
+                    <div class="w-24 h-16 bg-gradient-to-br from-accent-400 to-primary-400 rounded-lg shadow-2xl neon-glow"></div>
+                  )}
+                </div>
+                
+                <!-- Breaking Badge -->
+                <div class="absolute top-4 left-4 px-3 py-1 bg-red-500/90 text-white rounded-full text-xs font-bold">
+                  BREAKING
+                </div>
+              </div>
+              
+              <!-- Featured Content -->
+              <div class="lg:w-1/2 p-8 space-y-6">
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-2 text-sm">
+                    <span class="px-2 py-1 bg-accent-500/20 text-accent-300 rounded-full text-xs font-medium capitalize">
+                      {featuredNews[0].data.category}
+                    </span>
+                    <span class="text-muted-foreground">•</span>
+                    <span class="text-muted-foreground">
+                      {new Date(featuredNews[0].data.date).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric',
+                        year: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                  
+                  <h3 class="text-2xl lg:text-3xl font-bold text-foreground group-hover:text-accent-400 transition-colors duration-300">
+                    {featuredNews[0].data.title}
+                  </h3>
+                </div>
+                
+                <p class="text-lg text-muted-foreground leading-relaxed">
+                  {featuredNews[0].data.description}
+                </p>
+                
+                <div class="flex items-center justify-between pt-4">
+                  <div class="flex items-center space-x-2 text-sm text-muted-foreground">
+                    <span>By {featuredNews[0].data.author}</span>
+                  </div>
+                  
+                  <a 
+                    href={`/posts/${featuredNews[0].slug}`}
+                    class="inline-flex items-center space-x-2 text-accent-400 hover:text-accent-300 font-medium transition-colors duration-200"
+                  >
+                    <span>Read Analysis</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        )}
+
+        <!-- Secondary Featured Stories -->
+        {featuredNews.slice(1, 3).length > 0 && (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {featuredNews.slice(1, 3).map((article, index) => (
+              <article key={index} class="glass-dark rounded-xl p-6 hover:scale-[1.02] transition-all duration-300 group">
+                <div class="space-y-4">
+                  <div class="flex items-center space-x-2 text-sm">
+                    <span class="px-2 py-1 bg-accent-500/20 text-accent-300 rounded-full text-xs font-medium capitalize">
+                      {article.data.category}
+                    </span>
+                    <span class="text-muted-foreground">
+                      {new Date(article.data.date).toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                  
+                  <h3 class="text-xl font-bold text-foreground group-hover:text-accent-400 transition-colors duration-200">
+                    {article.data.title}
+                  </h3>
+                  
+                  <p class="text-sm text-muted-foreground line-clamp-3">
+                    {article.data.description}
+                  </p>
+                  
+                  <a 
+                    href={`/posts/${article.slug}`}
+                    class="inline-flex items-center text-accent-400 hover:text-accent-300 text-sm font-medium transition-colors duration-200"
+                  >
+                    Read More →
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+    )}
+
+    <!-- All News Grid -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
+          <h2 class="text-3xl font-bold text-gradient">Latest News</h2>
+        </div>
+        
+        <!-- Category Filter (Future Enhancement) -->
+        <div class="hidden sm:flex items-center space-x-2 text-sm">
+          <span class="text-muted-foreground">Categories:</span>
+          {categories.slice(0, 4).map((category) => (
+            <span key={category} class="px-2 py-1 bg-primary-500/10 text-primary-300 rounded text-xs capitalize">
+              {category}
+            </span>
+          ))}
+        </div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentNews.map((article, index) => (
+          <article key={index} class="switch-card group cursor-pointer float-animation" style={`animation-delay: ${index * 0.1}s`}>
+            <!-- Article Image -->
+            <div class="aspect-video bg-gradient-to-br from-accent-500/20 to-primary-500/20 rounded-lg mb-4 overflow-hidden">
+              {article.data.heroImage ? (
+                <img 
+                  src={article.data.heroImage}
+                  alt={article.data.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="w-full h-full flex items-center justify-center">
+                  <div class="w-16 h-10 bg-gradient-to-br from-accent-400 to-primary-400 rounded shadow-lg"></div>
+                </div>
+              )}
+            </div>
+            
+            <!-- Article Meta -->
+            <div class="space-y-3">
+              <div class="flex items-center justify-between text-sm">
+                <span class="px-2 py-1 bg-accent-500/20 text-accent-300 rounded-full text-xs font-medium capitalize">
+                  {article.data.category}
+                </span>
+                <span class="text-xs text-muted-foreground">
+                  {new Date(article.data.date).toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric'
+                  })}
+                </span>
+              </div>
+              
+              <h3 class="font-bold text-foreground group-hover:text-accent-400 transition-colors duration-200 line-clamp-2">
+                {article.data.title}
+              </h3>
+              
+              <p class="text-sm text-muted-foreground line-clamp-2">
+                {article.data.description}
+              </p>
+              
+              <div class="flex items-center justify-between pt-2 text-xs text-muted-foreground">
+                <span>By {article.data.author}</span>
+                {article.data.tags && article.data.tags[0] && (
+                  <span class="px-2 py-1 bg-primary-500/10 text-primary-300 rounded">
+                    {article.data.tags[0]}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            <!-- Hidden link for accessibility and SEO -->
+            <a href={`/posts/${article.slug}`} class="absolute inset-0" aria-label={`Read ${article.data.title}`}>
+              <span class="sr-only">Read {article.data.title}</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* Card hover effects */
+  .switch-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .switch-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(143, 110, 213, 0.1), transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  .switch-card:hover::before {
+    left: 100%;
+  }
+  
+  /* Line clamp utility */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

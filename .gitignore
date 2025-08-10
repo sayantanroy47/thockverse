@@ -50,6 +50,14 @@ coverage/
 tmp/
 temp/
 
+# Development files that shouldn't be committed
+extract-reviews.js
+future.md
+prompt.odt
+
+# Local Claude settings overrides
+# (base settings.json is tracked, but local overrides are ignored)
+
 # Playwright
 test-results/
 playwright-report/
@@ -89,3 +97,11 @@ playwright/.cache/
 # Temporary folders
 tmp/
 temp/
+
+# Development files that shouldn't be committed
+extract-reviews.js
+future.md
+prompt.odt
+
+# Local Claude settings overrides
+# (base settings.json is tracked, but local overrides are ignored)

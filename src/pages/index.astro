@@ -3,87 +3,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
-// This will be implemented with Astro content collections later
-// For now, using sample data from our markdown files
-const featuredPost = {
-  title: "Cherry MX Blue Review: The Clicky Typing Icon",
-  description: "The definitive clicky switch that started it all. Beloved by typists for its audible and tactile feedback, though definitely not for quiet environments.",
-  slug: "cherry-mx-blue",
-  image: "/images/cherry-mx-blue-hero.jpg",
-  rating: 8.5,
-  category: "switches",
-  date: "2025-08-07",
-  author: "Switch Expert"
-};
+// Get all content from collections
+const [switches, tutorials, news] = await Promise.all([
+  getCollection('switches'),
+  getCollection('tutorials'), 
+  getCollection('news')
+]);
 
-const latestPosts = [
-  {
-    title: "Gateron Oil Kings: The Deep Thock Experience",
-    description: "Deep-sounding linear switch with a premium feel.",
-    slug: "gateron-oil-kings", 
-    image: "/images/gateron-oil-kings-card.jpg",
-    rating: 9.2,
-    category: "switches",
-    date: "2025-08-06",
-    author: "Thock Guru"
-  },
-  {
-    title: "Holy Panda: The Legendary Tactile Switch",
-    description: "The most hyped tactile switch ever.",
-    slug: "holy-panda",
-    image: "/images/holy-panda-card.jpg", 
-    rating: 9.0,
-    category: "switches",
-    date: "2025-08-05",
-    author: "Switch Expert"
-  },
-  {
-    title: "Alpaca V2: Linear Perfection Refined",
-    description: "The updated version of the beloved linear switch.",
-    slug: "alpaca-v2",
-    image: "/images/alpaca-v2-card.jpg",
-    rating: 8.8,
-    category: "switches", 
-    date: "2025-08-04",
-    author: "Linear Specialist"
-  },
-  {
-    title: "Zealios V2: Tactile Excellence",
-    description: "Premium tactile switches with customizable weight options.",
-    slug: "zealios-v2",
-    image: "/images/zealios-v2-card.jpg",
-    rating: 8.7,
-    category: "switches",
-    date: "2025-08-03",
-    author: "Tactile Master"
-  },
-  {
-    title: "Tofu65 Gasket Upgrade: Transformation Guide",
-    description: "How to transform your Tofu65 into a gasket-mount wonder.",
-    slug: "tofu65-gasket-upgrade",
-    image: "/images/tofu65-upgrade-card.jpg",
-    rating: 8.9,
-    category: "tutorials",
-    date: "2025-08-02", 
-    author: "Build Expert"
-  },
-  {
-    title: "Tealios V2: Smooth Operator",
-    description: "The smoothest linear switch in Zeal's lineup.",
-    slug: "tealios-v2",
-    image: "/images/tealios-v2-card.jpg",
-    rating: 8.6,
-    category: "switches",
-    date: "2025-08-01",
-    author: "Linear Specialist"
-  }
-];
+// Filter out drafts and combine all content
+const allContent = [
+  ...switches.map(entry => ({ ...entry, collection: 'switches' })),
+  ...tutorials.map(entry => ({ ...entry, collection: 'tutorials' })),
+  ...news.map(entry => ({ ...entry, collection: 'news' }))
+].filter(entry => !entry.data.draft);
+
+// Sort by date (newest first) and get featured content
+const sortedContent = allContent.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+// Featured post - get the highest rated recent article or first featured one
+const featuredPost = sortedContent.find(entry => entry.data.featured) || sortedContent[0];
+
+// Latest posts - get the 6 most recent articles (excluding the featured one)
+const latestPosts = sortedContent.filter(entry => entry.slug !== featuredPost.slug).slice(0, 6);
 
 const stats = [
-  { label: "Switch Reviews", value: "150+", icon: "⚡" },
-  { label: "Keyboards Tested", value: "75+", icon: "⌨️" },
-  { label: "Community Members", value: "25K+", icon: "👥" },
-  { label: "Sound Samples", value: "200+", icon: "🔊" }
+  { label: "Articles Published", value: `${allContent.length}+`, icon: "📄" },
+  { label: "Switch Reviews", value: `${switches.length}+`, icon: "⚡" },
+  { label: "Tutorials & Guides", value: `${tutorials.length}+`, icon: "🎓" },
+  { label: "Industry Analysis", value: `${news.length}+`, icon: "📊" }
 ];
 ---
 
@@ -95,13 +42,6 @@ const stats = [
   <div class="space-y-16">
     <!-- Hero Section -->
     <section class="text-center space-y-8 py-12 relative">
-      <!-- Floating particles -->
-      <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-20 left-10 w-2 h-2 bg-primary-400 rounded-full animate-pulse float-animation"></div>
-        <div class="absolute top-32 right-16 w-1 h-1 bg-accent-400 rounded-full animate-pulse float-animation"></div>
-        <div class="absolute top-16 right-32 w-3 h-3 bg-primary-300 rounded-full animate-pulse float-animation"></div>
-        <div class="absolute bottom-20 left-20 w-1 h-1 bg-accent-300 rounded-full animate-pulse float-animation"></div>
-      </div>
       
       <div class="relative z-10">
         <h1 class="text-6xl lg:text-7xl font-bold text-gradient mb-6 leading-tight">

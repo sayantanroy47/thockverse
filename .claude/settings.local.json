@@ -22,7 +22,9 @@
       "Bash(git remote add:*)",
       "Bash(git add:*)",
       "Bash(git rm:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(git push:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }

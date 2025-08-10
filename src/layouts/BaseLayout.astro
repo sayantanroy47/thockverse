@@ -98,10 +98,20 @@ const socialImage = new URL(image, Astro.url);
 
     <!-- Main Layout -->
     <div class="flex min-h-screen pt-16">
-      <!-- Sidebar -->
+      <!-- Main Content -->
+      <main 
+        id="main-content"
+        class={`flex-1 ${showSidebar ? 'lg:mr-80' : ''} min-h-screen`}
+      >
+        <div class="max-w-ultra mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <slot />
+        </div>
+      </main>
+
+      <!-- Sidebar (Right Side) -->
       {showSidebar && (
         <div class="hidden lg:block flex-shrink-0">
-          <div class="w-80 fixed top-20 h-[calc(100vh-5rem)] overflow-y-auto scrollbar-thin">
+          <div class="w-80 fixed top-20 right-0 h-[calc(100vh-5rem)] overflow-hidden">
             <Sidebar posts={posts} popularSwitches={popularSwitches} />
           </div>
         </div>
@@ -115,16 +125,6 @@ const socialImage = new URL(image, Astro.url);
           </div>
         </div>
       )}
-
-      <!-- Main Content -->
-      <main 
-        id="main-content"
-        class={`flex-1 ${showSidebar ? 'lg:ml-80' : ''} min-h-screen`}
-      >
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <slot />
-        </div>
-      </main>
     </div>
 
     <!-- Footer -->

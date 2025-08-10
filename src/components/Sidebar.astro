@@ -84,7 +84,7 @@ const categories = [
 ];
 ---
 
-<aside class="w-80 glass-dark p-6 space-y-8 h-fit sticky top-20" id="sidebar">
+<aside class="w-80 glass-dark p-6 space-y-6 h-full force-no-scroll overflow-hidden" id="sidebar">
   <!-- Sidebar Toggle (Mobile) -->
   <button 
     id="sidebar-toggle"
@@ -98,19 +98,19 @@ const categories = [
 
   <!-- Latest Posts Widget -->
   <div class="space-y-4">
-    <div class="flex items-center space-x-2">
-      <div class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-      <h3 class="text-lg font-semibold text-gradient">Latest Posts</h3>
+    <div class="flex items-center space-x-2 hover-reveal-trigger">
+      <div class="w-2 h-2 neon-blue rounded-full stellar-glow"></div>
+      <h3 class="text-lg font-semibold text-accent">Latest Posts</h3>
     </div>
     
-    <div class="space-y-3">
-      {latestPosts.map((post) => (
+    <div class="space-y-3 infinite-scroll-container force-no-scroll overflow-hidden" data-type="posts">
+      {latestPosts.map((post, index) => (
         <a 
           href={`/posts/${post.slug}`}
-          class="flex space-x-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-200 group"
+          class="flex space-x-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-200 group hover-lift"
         >
           <!-- Post thumbnail -->
-          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500/20 to-accent-500/20 flex items-center justify-center overflow-hidden">
+          <div class="flex-shrink-0 w-12 h-12 rounded-lg bg-card border border-border flex items-center justify-center overflow-hidden">
             {post.image ? (
               <img 
                 src={post.image} 
@@ -119,7 +119,7 @@ const categories = [
                 loading="lazy"
               />
             ) : (
-              <div class="w-6 h-6 bg-gradient-to-br from-primary-400 to-accent-400 rounded"></div>
+              <div class="w-6 h-6 bg-primary/60 rounded"></div>
             )}
           </div>
           
@@ -151,21 +151,21 @@ const categories = [
 
   <!-- Popular Switches Widget -->
   <div class="space-y-4">
-    <div class="flex items-center space-x-2">
-      <div class="w-2 h-2 bg-accent-500 rounded-full animate-pulse"></div>
-      <h3 class="text-lg font-semibold bg-gradient-to-r from-accent-400 to-primary-400 bg-clip-text text-transparent">
+    <div class="flex items-center space-x-2 hover-reveal-trigger">
+      <div class="w-2 h-2 neon-pink rounded-full stellar-glow"></div>
+      <h3 class="text-lg font-semibold text-accent">
         Popular Switches
       </h3>
     </div>
     
-    <div class="space-y-2">
+    <div class="space-y-2 infinite-scroll-container force-no-scroll overflow-hidden" data-type="switches">
       {topSwitches.map((switchItem, index) => (
         <a 
           href={`/switches/${switchItem.slug}`}
-          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-200 group"
+          class="flex items-center space-x-3 p-3 rounded-lg hover:bg-white/5 transition-all duration-200 group hover-lift"
         >
           <!-- Rank number -->
-          <div class="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-to-br from-accent-500 to-primary-500 flex items-center justify-center text-xs font-bold">
+          <div class="flex-shrink-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center text-xs font-bold text-primary-foreground">
             {index + 1}
           </div>
           
@@ -179,7 +179,7 @@ const categories = [
                 loading="lazy"
               />
             ) : (
-              <div class="w-4 h-3 bg-gradient-to-br from-primary-400 to-accent-400 rounded-sm"></div>
+              <div class="w-4 h-3 bg-primary/60 rounded-sm"></div>
             )}
           </div>
           
@@ -188,7 +188,7 @@ const categories = [
               <h4 class="text-sm font-medium text-foreground group-hover:text-primary transition-colors duration-200 truncate">
                 {switchItem.name}
               </h4>
-              <span class="text-xs font-bold text-secondary">
+              <span class="text-xs font-bold text-accent stellar-glow">
                 {switchItem.score}
               </span>
             </div>
@@ -213,8 +213,8 @@ const categories = [
 
   <!-- Categories Navigation -->
   <div class="space-y-4">
-    <div class="flex items-center space-x-2">
-      <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+    <div class="flex items-center space-x-2 hover-reveal-trigger">
+      <div class="w-2 h-2 neon-green rounded-full stellar-glow"></div>
       <h3 class="text-lg font-semibold text-foreground">Categories</h3>
     </div>
     
@@ -222,7 +222,7 @@ const categories = [
       {categories.map((category) => (
         <a 
           href={`/category/${category.name.toLowerCase().replace(' ', '-')}`}
-          class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-all duration-200 group"
+          class="flex items-center justify-between p-2 rounded-lg hover:bg-white/5 transition-all duration-200 group hover-lift"
         >
           <div class="flex items-center space-x-3">
             <span class="text-lg">{category.icon}</span>
@@ -253,7 +253,7 @@ const categories = [
         placeholder="Enter your email"
         class="flex-1 px-3 py-2 text-xs rounded bg-input border border-border text-foreground placeholder-muted-foreground focus-space"
       >
-      <button class="px-3 py-2 text-xs font-medium bg-gradient-to-r from-primary-500 to-accent-500 rounded hover:from-primary-400 hover:to-accent-400 transition-all duration-200">
+      <button class="px-3 py-2 text-xs font-medium bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-all duration-200">
         Join
       </button>
     </div>
@@ -298,7 +298,79 @@ const categories = [
   handleResize();
   window.addEventListener('resize', handleResize);
 
-  // Newsletter signup placeholder
+  // Epic neon hover effects
+  document.querySelectorAll('.hover-reveal-trigger').forEach(trigger => {
+    trigger.addEventListener('mouseenter', () => {
+      const reveal = trigger.querySelector('.hover-reveal');
+      reveal?.classList.add('active');
+    });
+    
+    trigger.addEventListener('mouseleave', () => {
+      const reveal = trigger.querySelector('.hover-reveal');
+      reveal?.classList.remove('active');
+    });
+  });
+
+  // Glitch effect on hover
+  document.querySelectorAll('.glitch-on-hover').forEach(element => {
+    element.addEventListener('mouseenter', () => {
+      element.classList.add('glitch');
+      setTimeout(() => element.classList.remove('glitch'), 300);
+    });
+  });
+
+  // Infinite scroll simulation (for future enhancement)
+  class InfiniteScroll {
+    constructor(container) {
+      this.container = container;
+      this.type = container.dataset.type;
+      this.isLoading = false;
+      this.observeLastItem();
+    }
+
+    observeLastItem() {
+      const lastItem = this.container.lastElementChild;
+      if (!lastItem) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.isLoading) {
+            this.loadMore();
+          }
+        });
+      }, { threshold: 0.1 });
+
+      observer.observe(lastItem);
+    }
+
+    async loadMore() {
+      if (this.isLoading) return;
+      this.isLoading = true;
+
+      // Create loading indicator
+      const loading = document.createElement('div');
+      loading.className = 'flex justify-center py-4';
+      loading.innerHTML = '<div class="neon-cyan neon-glow text-xs">Loading more...</div>';
+      this.container.appendChild(loading);
+
+      // Simulate loading delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      // Remove loading indicator
+      loading.remove();
+      this.isLoading = false;
+
+      // In real implementation, this would fetch more data
+      console.log(`Loading more ${this.type}...`);
+    }
+  }
+
+  // Initialize infinite scroll for containers
+  document.querySelectorAll('.infinite-scroll-container').forEach(container => {
+    new InfiniteScroll(container);
+  });
+
+  // Enhanced newsletter signup with neon effects
   const newsletterForm = sidebar?.querySelector('input[type="email"]')?.parentElement;
   const newsletterButton = newsletterForm?.querySelector('button');
   const newsletterInput = newsletterForm?.querySelector('input');
@@ -307,19 +379,49 @@ const categories = [
     const email = newsletterInput?.value;
     if (email && email.includes('@')) {
       newsletterButton.textContent = 'Joined!';
-      newsletterButton.style.background = '#10B981';
+      newsletterButton.classList.add('neon-green', 'neon-glow');
+      newsletterButton.style.background = 'rgba(57, 255, 20, 0.2)';
+      
       setTimeout(() => {
         newsletterButton.textContent = 'Join';
+        newsletterButton.classList.remove('neon-green', 'neon-glow');
         newsletterButton.style.background = '';
       }, 2000);
+    }
+  });
+
+  // Add particle trails to interactive elements
+  function createParticleTrail(event) {
+    const particle = document.createElement('div');
+    particle.style.cssText = `
+      position: fixed;
+      left: ${event.clientX}px;
+      top: ${event.clientY}px;
+      width: 4px;
+      height: 4px;
+      background: rgb(0, 255, 255);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      animation: particle-fade 0.5s ease-out forwards;
+    `;
+    
+    document.body.appendChild(particle);
+    setTimeout(() => particle.remove(), 500);
+  }
+
+  // Add particle trails to neon elements
+  sidebar?.addEventListener('mousemove', (e) => {
+    if (Math.random() < 0.1) { // Only create particles sometimes
+      createParticleTrail(e);
     }
   });
 </script>
 
 <style>
-  /* Sidebar animation */
+  /* Enhanced sidebar animation */
   #sidebar {
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
   
   /* Line clamp utility */
@@ -330,28 +432,70 @@ const categories = [
     overflow: hidden;
   }
   
-  /* Custom scrollbar for sidebar content */
-  #sidebar {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(58, 155, 220, 0.3) transparent;
+  /* Glitch effect keyframes */
+  @keyframes glitch-text {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(-2px) skewX(1deg); }
+    20% { transform: translateX(2px) skewX(-1deg); }
+    30% { transform: translateX(-1px); }
+    40% { transform: translateX(1px) skewX(0.5deg); }
+    50% { transform: translateX(-0.5px); }
+    60% { transform: translateX(0.5px) skewX(-0.5deg); }
+    70% { transform: translateX(-0.25px); }
+    80% { transform: translateX(0.25px); }
+    90% { transform: translateX(-0.1px); }
+    100% { transform: translateX(0); }
   }
   
-  #sidebar::-webkit-scrollbar {
-    width: 4px;
+  .glitch {
+    animation: glitch-text 0.3s ease-in-out;
   }
   
-  #sidebar::-webkit-scrollbar-track {
-    background: transparent;
+  /* Particle trail animation */
+  @keyframes particle-fade {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0) translateY(-20px);
+    }
   }
   
-  #sidebar::-webkit-scrollbar-thumb {
-    background: rgba(58, 155, 220, 0.3);
-    border-radius: 2px;
-  }
-  
-  /* Hover effects */
+  /* Enhanced hover effects */
   .group:hover .animate-pulse {
     animation-play-state: paused;
+  }
+  
+  .group:hover .neon-glow {
+    animation: neon-pulse 0.5s ease-in-out;
+  }
+  
+  /* Neon border animation */
+  .cyber-border {
+    position: relative;
+  }
+  
+  .cyber-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, 
+      transparent 0%, 
+      rgba(0, 255, 255, 0.3) 25%, 
+      rgba(255, 20, 147, 0.3) 50%, 
+      rgba(57, 255, 20, 0.3) 75%, 
+      transparent 100%
+    );
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  .cyber-border:hover::before {
+    opacity: 1;
   }
   
   /* Mobile-specific styles */
@@ -362,7 +506,24 @@ const categories = [
       left: 0;
       z-index: 40;
       height: calc(100vh - 4rem);
-      overflow-y: auto;
+      overflow: hidden !important;
+      max-width: 320px;
     }
+  }
+  
+  /* Custom neon text effects */
+  .text-gradient {
+    background: linear-gradient(45deg, rgb(0, 255, 255), rgb(255, 20, 147), rgb(57, 255, 20));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+  
+  @keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 </style>
